@@ -1,0 +1,1504 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investor Mortgage - Real Estate Investment Financing</title>
+    <link rel="icon" type="image/png" href="favicon.png">
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        /* ============================================
+           DESIGN SYSTEM - EASY TO UPDATE
+           Edit these variables to change the entire site
+           ============================================ */
+        :root {
+            /* Colors */
+            --color-primary: #123168;        /* Deep blue */
+            --color-primary-dark: #0d2347;   
+            --color-accent: #c9a961;         /* Warm gold */
+            --color-accent-light: #e5d4a3;
+            --color-text: #2c2c2c;
+            --color-text-light: #6b6b6b;
+            --color-background: #ffffff;
+            --color-background-alt: #f8f9fa;
+            --color-border: #e0e0e0;
+            
+            /* Typography */
+            --font-heading: 'Montserrat', sans-serif;
+            --font-body: 'Montserrat', sans-serif;
+            
+            /* Spacing */
+            --spacing-xs: 0.5rem;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --spacing-xl: 6rem;
+            
+            /* Layout */
+            --max-width: 1200px;
+            --border-radius: 4px;
+            --transition: all 0.3s ease;
+        }
+        
+        /* ============================================
+           BASE STYLES
+           ============================================ */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: var(--font-body);
+            color: var(--color-text);
+            line-height: 1.6;
+            background: var(--color-background);
+        }
+        
+        h1, h2, h3, h4, h5, h6 {
+            font-family: var(--font-heading);
+            font-weight: 600;
+            line-height: 1.2;
+            color: var(--color-primary);
+        }
+        
+        h1 { font-size: 3.5rem; margin-bottom: var(--spacing-md); }
+        h2 { font-size: 2.5rem; margin-bottom: var(--spacing-md); }
+        h3 { font-size: 1.75rem; margin-bottom: var(--spacing-sm); }
+        h4 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
+        
+        p { margin-bottom: var(--spacing-sm); }
+        
+        a {
+            color: var(--color-primary);
+            text-decoration: none;
+            transition: var(--transition);
+        }
+        
+        a:hover {
+            color: var(--color-accent);
+        }
+        
+        /* ============================================
+           HEADER & NAVIGATION
+           ============================================ */
+        header {
+            background: var(--color-background);
+            border-bottom: 1px solid var(--color-border);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+        }
+        
+        nav {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: var(--spacing-sm) var(--spacing-md);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            font-family: var(--font-heading);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--color-primary);
+        }
+        
+        .logo span {
+            color: var(--color-accent);
+        }
+        
+        .nav-links {
+            display: flex;
+            gap: var(--spacing-md);
+            list-style: none;
+        }
+        
+        .nav-links a {
+            font-weight: 500;
+            padding: var(--spacing-xs) var(--spacing-sm);
+            border-radius: var(--border-radius);
+        }
+        
+        .nav-links a:hover,
+        .nav-links a.active {
+            background: var(--color-background-alt);
+            color: var(--color-primary);
+        }
+        
+        .mobile-menu-toggle {
+            display: none;
+            flex-direction: column;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0.5rem;
+            z-index: 1001;
+        }
+        
+        .mobile-menu-toggle span {
+            width: 25px;
+            height: 3px;
+            background: var(--color-primary);
+            margin: 3px 0;
+            transition: var(--transition);
+            border-radius: 3px;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(2) {
+            opacity: 0;
+        }
+        
+        .mobile-menu-toggle.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
+        }
+        
+        /* ============================================
+           LAYOUT COMPONENTS
+           ============================================ */
+        .container {
+            max-width: var(--max-width);
+            margin: 0 auto;
+            padding: 0 var(--spacing-md);
+        }
+        
+        .page {
+            display: none;
+            min-height: 60vh;
+        }
+        
+        .page.active {
+            display: block;
+            animation: fadeIn 0.4s ease;
+        }
+        
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+        
+        .hero {
+            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
+            color: white;
+            padding: var(--spacing-xl) 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
+            opacity: 0.5;
+        }
+        
+        .hero h1 {
+            color: white;
+            position: relative;
+            z-index: 1;
+        }
+        
+        .hero p {
+            font-size: 1.25rem;
+            max-width: 700px;
+            margin: 0 auto var(--spacing-md);
+            position: relative;
+            z-index: 1;
+            color: rgba(255,255,255,0.95);
+        }
+        
+        .section {
+            padding: var(--spacing-xl) 0;
+        }
+        
+        .section-alt {
+            background: var(--color-background-alt);
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: var(--spacing-lg);
+        }
+        
+        .section-header p {
+            color: var(--color-text-light);
+            font-size: 1.125rem;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+        
+        /* ============================================
+           BUTTONS
+           ============================================ */
+        .btn {
+            display: inline-block;
+            padding: var(--spacing-sm) var(--spacing-md);
+            border-radius: var(--border-radius);
+            font-weight: 600;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition);
+            border: none;
+            font-family: var(--font-body);
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            background: var(--color-accent);
+            color: var(--color-primary);
+        }
+        
+        .btn-primary:hover {
+            background: var(--color-accent-light);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: var(--color-primary);
+        }
+        
+        /* ============================================
+           GRID LAYOUTS
+           ============================================ */
+        .grid {
+            display: grid;
+            gap: var(--spacing-md);
+        }
+        
+        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
+        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
+        
+        /* ============================================
+           CARDS
+           ============================================ */
+        .card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            transition: var(--transition);
+        }
+        
+        .card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .card h3 {
+            color: var(--color-primary);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .card-icon {
+            width: 60px;
+            height: 60px;
+            background: var(--color-accent);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin-bottom: var(--spacing-sm);
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        /* ============================================
+           PRODUCT CARDS
+           ============================================ */
+        .product-card {
+            background: white;
+            border: 2px solid var(--color-border);
+            border-radius: var(--border-radius);
+            padding: var(--spacing-md);
+            transition: var(--transition);
+        }
+        
+        .product-card:hover {
+            border-color: var(--color-accent);
+            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.15);
+        }
+        
+        .product-tag {
+            display: inline-block;
+            background: var(--color-primary);
+            color: white;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: 600;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .product-features {
+            list-style: none;
+            margin-top: var(--spacing-sm);
+        }
+        
+        .product-features li {
+            padding: var(--spacing-xs) 0;
+            border-bottom: 1px solid var(--color-background-alt);
+            color: var(--color-text-light);
+        }
+        
+        .product-features li:before {
+            content: "✓";
+            color: var(--color-accent);
+            font-weight: bold;
+            margin-right: var(--spacing-xs);
+        }
+        
+        /* ============================================
+           BLOG CARDS
+           ============================================ */
+        .blog-card {
+            background: white;
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            overflow: hidden;
+            transition: var(--transition);
+        }
+        
+        .blog-card:hover {
+            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
+            transform: translateY(-4px);
+        }
+        
+        .blog-image {
+            width: 100%;
+            height: 200px;
+            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-family: var(--font-heading);
+            font-size: 1.25rem;
+        }
+        
+        .blog-content {
+            padding: var(--spacing-md);
+        }
+        
+        .blog-meta {
+            color: var(--color-text-light);
+            font-size: 0.875rem;
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .blog-card h3 {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        /* ============================================
+           CONTACT FORM
+           ============================================ */
+        .contact-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--spacing-lg);
+            align-items: start;
+        }
+        
+        .contact-info {
+            background: var(--color-background-alt);
+            padding: var(--spacing-md);
+            border-radius: var(--border-radius);
+        }
+        
+        .contact-info h3 {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-item {
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .contact-item strong {
+            display: block;
+            color: var(--color-primary);
+            margin-bottom: 0.25rem;
+        }
+        
+        .form-group {
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--color-primary);
+        }
+        
+        input, textarea, select {
+            width: 100%;
+            padding: var(--spacing-sm);
+            border: 1px solid var(--color-border);
+            border-radius: var(--border-radius);
+            font-family: var(--font-body);
+            font-size: 1rem;
+            transition: var(--transition);
+        }
+        
+        input:focus, textarea:focus, select:focus {
+            outline: none;
+            border-color: var(--color-accent);
+            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
+        }
+        
+        textarea {
+            resize: vertical;
+            min-height: 150px;
+        }
+        
+        /* ============================================
+           STATS SECTION
+           ============================================ */
+        .stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--spacing-md);
+            text-align: center;
+            padding: var(--spacing-lg) 0;
+        }
+        
+        .stat h3 {
+            font-size: 3rem;
+            color: var(--color-accent);
+            margin-bottom: 0.25rem;
+        }
+        
+        .stat p {
+            color: var(--color-text-light);
+            font-weight: 600;
+        }
+        
+        /* ============================================
+           FOOTER
+           ============================================ */
+        footer {
+            background: var(--color-primary);
+            color: white;
+            padding: var(--spacing-lg) 0 var(--spacing-md);
+            margin-top: var(--spacing-xl);
+        }
+        
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: var(--spacing-lg);
+            margin-bottom: var(--spacing-md);
+        }
+        
+        .footer-section h4 {
+            color: var(--color-accent);
+            margin-bottom: var(--spacing-sm);
+        }
+        
+        .footer-section ul {
+            list-style: none;
+        }
+        
+        .footer-section ul li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .footer-section a {
+            color: rgba(255,255,255,0.8);
+        }
+        
+        .footer-section a:hover {
+            color: var(--color-accent);
+        }
+        
+        .footer-bottom {
+            text-align: center;
+            padding-top: var(--spacing-md);
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: rgba(255,255,255,0.7);
+        }
+        
+        /* ============================================
+           RESPONSIVE DESIGN
+           ============================================ */
+        @media (max-width: 768px) {
+            h1 { font-size: 2.5rem; }
+            h2 { font-size: 2rem; }
+            
+            .mobile-menu-toggle {
+                display: flex;
+            }
+            
+            .nav-links {
+                position: fixed;
+                top: 73px;
+                right: -100%;
+                width: 100%;
+                max-width: 300px;
+                height: calc(100vh - 73px);
+                background: white;
+                flex-direction: column;
+                padding: var(--spacing-md);
+                gap: 0;
+                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
+                transition: right 0.3s ease;
+                z-index: 999;
+            }
+            
+            .nav-links.active {
+                right: 0;
+            }
+            
+            .nav-links li {
+                width: 100%;
+                margin-bottom: var(--spacing-sm);
+            }
+            
+            .nav-links a {
+                display: block;
+                width: 100%;
+                padding: var(--spacing-sm);
+                border-radius: var(--border-radius);
+            }
+            
+            .hero {
+                padding: var(--spacing-lg) 0;
+            }
+            
+            .section {
+                padding: var(--spacing-lg) 0;
+            }
+            
+            .contact-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .grid-2, .grid-3, .grid-4 {
+                grid-template-columns: 1fr;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            
+            nav {
+                padding: var(--spacing-sm);
+            }
+            
+            .logo {
+                font-size: 1.25rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- ============================================
+         HEADER & NAVIGATION
+         ============================================ -->
+    <header>
+        <nav>
+            <a href="#home" onclick="showPage('home')" style="text-decoration: none;">
+                <div class="logo">Investor <span>Mortgage</span></div>
+            </a>
+            
+            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            
+            <ul class="nav-links">
+                <li><a href="#home" class="nav-link active" onclick="showPage('home')">Home</a></li>
+                <li><a href="#services" class="nav-link" onclick="showPage('services')">Services</a></li>
+                <li><a href="#products" class="nav-link" onclick="showPage('products')">Products</a></li>
+                <li><a href="#about" class="nav-link" onclick="showPage('about')">About</a></li>
+                <li><a href="#blog" class="nav-link" onclick="showPage('blog')">Blog</a></li>
+                <li><a href="#contact" class="nav-link" onclick="showPage('contact')">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- ============================================
+         HOME PAGE
+         ============================================ -->
+    <div id="home" class="page active">
+        <div class="hero">
+            <div class="container">
+                <h1>Strategic Financing for<br>Real Estate Investors</h1>
+                <p>Trusted mortgage solutions built for experienced investors. Fast closings, competitive rates, and dedicated support for your portfolio growth.</p>
+                <button class="btn btn-secondary" onclick="showPage('contact')">Get Started</button>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Investors Choose Us</h2>
+                    <p>Experienced team financing real estate investments across the nation</p>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card">
+                        <div class="card-icon">⚡</div>
+                        <h3>Fast Closings</h3>
+                        <p>Close in as little as 7-10 days. We understand timing is critical for investment opportunities.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">💼</div>
+                        <h3>Portfolio Expertise</h3>
+                        <p>Specialized knowledge in investment properties, from single units to commercial portfolios.</p>
+                    </div>
+                    <div class="card">
+                        <div class="card-icon">🤝</div>
+                        <h3>Dedicated Support</h3>
+                        <p>Direct access to experienced loan officers who understand investor needs.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Product Suite</h2>
+                    <p>Comprehensive financing solutions for every investment strategy</p>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card">
+                        <h4>DSCR Loans</h4>
+                        <p>Rental income-based financing without tax returns</p>
+                    </div>
+                    <div class="card">
+                        <h4>Fix & Flip</h4>
+                        <p>Short-term financing for renovation projects</p>
+                    </div>
+                    <div class="card">
+                        <h4>Bridge Loans</h4>
+                        <p>Quick capital for time-sensitive opportunities</p>
+                    </div>
+                    <div class="card">
+                        <h4>New Construction</h4>
+                        <p>Ground-up development financing</p>
+                    </div>
+                    <div class="card">
+                        <h4>Multifamily</h4>
+                        <p>2-4+ unit investment properties</p>
+                    </div>
+                    <div class="card">
+                        <h4>Commercial</h4>
+                        <p>Retail, office, and mixed-use properties</p>
+                    </div>
+                    <div class="card">
+                        <h4>Portfolio</h4>
+                        <p>Finance multiple properties together</p>
+                    </div>
+                    <div class="card">
+                        <h4>Hard Money</h4>
+                        <p>Asset-based lending for any scenario</p>
+                    </div>
+                    <div class="card">
+                        <h4>Line of Credit</h4>
+                        <p>Flexible revolving credit for fix & flip and construction</p>
+                    </div>
+                </div>
+                
+                <div style="text-align: center; margin-top: var(--spacing-md);">
+                    <button class="btn btn-primary" onclick="showPage('products')">View All Products</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         SERVICES PAGE
+         ============================================ -->
+    <div id="services" class="page">
+        <div class="hero">
+            <div class="container">
+                <h1>Our Services</h1>
+                <p>Comprehensive mortgage solutions designed for real estate investors</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-2">
+                    <div class="card">
+                        <h3>Investment Property Financing</h3>
+                        <p>Specialized loans for residential and commercial investment properties. We finance single-family rentals, multifamily buildings, and commercial real estate with competitive rates and flexible terms.</p>
+                        <ul class="product-features">
+                            <li>Single-family rentals</li>
+                            <li>Multifamily properties (2-4+ units)</li>
+                            <li>Commercial real estate</li>
+                            <li>Mixed-use properties</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Renovation & Fix-and-Flip Loans</h3>
+                        <p>Short-term financing for investors purchasing and renovating properties for resale. Get the capital you need for acquisition and rehab costs with one streamlined loan.</p>
+                        <ul class="product-features">
+                            <li>Purchase + renovation costs covered</li>
+                            <li>Quick approvals and closings</li>
+                            <li>Flexible draw schedules</li>
+                            <li>Up to 90% ARV</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Portfolio Loans</h3>
+                        <p>Consolidate multiple properties under one loan or finance several properties simultaneously. Ideal for investors with 5+ rental properties looking to optimize their financing structure.</p>
+                        <ul class="product-features">
+                            <li>Finance 5-10+ properties</li>
+                            <li>Simplified management</li>
+                            <li>Competitive bulk pricing</li>
+                            <li>Cross-collateralization options</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>Bridge & Transitional Loans</h3>
+                        <p>Fast capital for time-sensitive opportunities. Bridge loans provide immediate funding while you arrange permanent financing or prepare a property for traditional lending.</p>
+                        <ul class="product-features">
+                            <li>Close in 7-10 days</li>
+                            <li>Flexible underwriting</li>
+                            <li>Interest-only payments</li>
+                            <li>Exit strategy focused</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>New Construction Financing</h3>
+                        <p>Ground-up development loans for residential and light commercial projects. We provide acquisition, construction, and mini-perm financing for your development projects.</p>
+                        <ul class="product-features">
+                            <li>Land acquisition + construction</li>
+                            <li>Single-family subdivisions</li>
+                            <li>Small multifamily development</li>
+                            <li>Progress-based funding</li>
+                        </ul>
+                    </div>
+
+                    <div class="card">
+                        <h3>DSCR Rental Loans</h3>
+                        <p>Qualify based on rental income, not personal income. Perfect for investors with strong rental properties but complex tax returns or multiple income sources.</p>
+                        <ul class="product-features">
+                            <li>No tax returns required</li>
+                            <li>Qualify on rental income</li>
+                            <li>30-year fixed options</li>
+                            <li>Lower documentation</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Process</h2>
+                    <p>Simple, transparent, and efficient</p>
+                </div>
+                
+                <div class="grid grid-4">
+                    <div class="card">
+                        <h4>1. Consultation</h4>
+                        <p>Discuss your investment goals and review financing options with our experts.</p>
+                    </div>
+                    <div class="card">
+                        <h4>2. Pre-Approval</h4>
+                        <p>Get pre-approved quickly with our streamlined application process.</p>
+                    </div>
+                    <div class="card">
+                        <h4>3. Property Review</h4>
+                        <p>We evaluate the property and provide term sheet within 24-48 hours.</p>
+                    </div>
+                    <div class="card">
+                        <h4>4. Fast Closing</h4>
+                        <p>Close in as little as 7-10 days and fund your investment.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         PRODUCTS PAGE
+         ============================================ -->
+    <div id="products" class="page">
+        <div class="hero">
+            <div class="container">
+                <h1>Financing Products</h1>
+                <p>Tailored solutions for every real estate investment strategy</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-2">
+                    <!-- DSCR -->
+                    <div class="product-card">
+                        <span class="product-tag">LONG-TERM HOLD</span>
+                        <h3>DSCR Loans</h3>
+                        <p><strong>Debt Service Coverage Ratio financing</strong> for rental properties. Qualify based on property cash flow, not personal income or tax returns.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>No personal income verification</li>
+                            <li>No tax returns required</li>
+                            <li>30-year fixed & ARM options</li>
+                            <li>Up to 80% LTV</li>
+                            <li>1-4 unit properties</li>
+                            <li>DSCR as low as 1.0</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Experienced investors with rental portfolios, self-employed investors, those with complex tax returns.</p>
+                    </div>
+
+                    <!-- Fix & Flip -->
+                    <div class="product-card">
+                        <span class="product-tag">SHORT-TERM</span>
+                        <h3>Fix & Flip Loans</h3>
+                        <p><strong>Renovation financing</strong> for investors purchasing, rehabbing, and reselling properties. One loan covers acquisition and construction costs.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Up to 90% ARV financing</li>
+                            <li>Purchase + rehab in one loan</li>
+                            <li>6-12 month terms</li>
+                            <li>Interest-only payments</li>
+                            <li>Flexible draw schedules</li>
+                            <li>Close in 7-10 days</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> House flippers, renovation specialists, investors seeking quick-turn opportunities.</p>
+                    </div>
+
+                    <!-- Bridge -->
+                    <div class="product-card">
+                        <span class="product-tag">TRANSITIONAL</span>
+                        <h3>Bridge Loans</h3>
+                        <p><strong>Short-term financing</strong> to bridge the gap between purchase and permanent financing or property stabilization.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Fast closings (7-14 days)</li>
+                            <li>Up to 75% LTV</li>
+                            <li>6-24 month terms</li>
+                            <li>Interest-only options</li>
+                            <li>Flexible underwriting</li>
+                            <li>Exit strategy focused</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Time-sensitive acquisitions, properties needing stabilization, investors awaiting permanent financing.</p>
+                    </div>
+
+                    <!-- New Construction -->
+                    <div class="product-card">
+                        <span class="product-tag">DEVELOPMENT</span>
+                        <h3>New Construction Loans</h3>
+                        <p><strong>Ground-up development financing</strong> for residential and light commercial construction projects.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Land + construction costs</li>
+                            <li>Up to 80% of project cost</li>
+                            <li>12-24 month terms</li>
+                            <li>Progress-based draws</li>
+                            <li>Single-family & small multifamily</li>
+                            <li>Mini-perm options available</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Developers, builders, investors creating new rental inventory or spec homes.</p>
+                    </div>
+
+                    <!-- Multifamily -->
+                    <div class="product-card">
+                        <span class="product-tag">INCOME PROPERTY</span>
+                        <h3>Multifamily Loans</h3>
+                        <p><strong>Financing for 2-4+ unit properties</strong> including duplexes, triplexes, fourplexes, and small apartment buildings.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>2-4 units: conventional & DSCR</li>
+                            <li>5+ units: commercial programs</li>
+                            <li>Up to 80% LTV</li>
+                            <li>30-year fixed available</li>
+                            <li>Portfolio discounts</li>
+                            <li>Value-add opportunities</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Investors scaling into larger properties, cash flow focused strategies.</p>
+                    </div>
+
+                    <!-- Commercial -->
+                    <div class="product-card">
+                        <span class="product-tag">COMMERCIAL</span>
+                        <h3>Commercial Real Estate</h3>
+                        <p><strong>Financing for commercial properties</strong> including retail, office, industrial, and mixed-use investments.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Up to 75% LTV</li>
+                            <li>5, 7, 10-year fixed options</li>
+                            <li>25-30 year amortizations</li>
+                            <li>DSCR as low as 1.20</li>
+                            <li>Cash-out refinance available</li>
+                            <li>Non-recourse options</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Investors diversifying into commercial, owner-users, 1031 exchange buyers.</p>
+                    </div>
+
+                    <!-- Portfolio -->
+                    <div class="product-card">
+                        <span class="product-tag">BULK FINANCING</span>
+                        <h3>Portfolio Financing</h3>
+                        <p><strong>Blanket loans</strong> covering multiple properties under one financing package with streamlined management.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>5-10+ properties in one loan</li>
+                            <li>Cross-collateralization</li>
+                            <li>Simplified servicing</li>
+                            <li>Competitive bulk pricing</li>
+                            <li>Flexible release options</li>
+                            <li>Mixed property types accepted</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Experienced investors with large portfolios seeking operational efficiency.</p>
+                    </div>
+
+                    <!-- Hard Money -->
+                    <div class="product-card">
+                        <span class="product-tag">ASSET-BASED</span>
+                        <h3>Hard Money Loans</h3>
+                        <p><strong>Asset-based lending</strong> focused on property value and equity. Fast funding for unique situations conventional lenders won't touch.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Equity-based approval</li>
+                            <li>Close in 3-7 days</li>
+                            <li>Up to 70% LTV</li>
+                            <li>Short-term (6-24 months)</li>
+                            <li>Flexible qualification</li>
+                            <li>Credit challenged accepted</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Distressed properties, foreclosures, urgent situations, credit challenges.</p>
+                    </div>
+
+                    <!-- Line of Credit -->
+                    <div class="product-card">
+                        <span class="product-tag">FLEXIBLE FUNDING</span>
+                        <h3>Line of Credit</h3>
+                        <p><strong>Revolving credit line</strong> for fix & flip and new construction projects. Draw funds as needed and only pay interest on what you use.</p>
+                        
+                        <h4 style="margin-top: var(--spacing-sm);">Key Features:</h4>
+                        <ul class="product-features">
+                            <li>Draw funds as needed</li>
+                            <li>Pay interest only on balance used</li>
+                            <li>Reusable credit line</li>
+                            <li>Perfect for multiple projects</li>
+                            <li>Fast access to capital</li>
+                            <li>Flexible repayment terms</li>
+                        </ul>
+                        
+                        <p style="margin-top: var(--spacing-sm);"><strong>Ideal For:</strong> Active flippers, serial developers, investors managing multiple renovation or construction projects simultaneously.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Not Sure Which Product Fits?</h2>
+                    <p>Our experienced loan officers will help you find the right solution</p>
+                </div>
+                <div style="text-align: center;">
+                    <button class="btn btn-primary" onclick="showPage('contact')">Schedule a Consultation</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         ABOUT PAGE
+         ============================================ -->
+    <div id="about" class="page">
+        <div class="hero">
+            <div class="container">
+                <h1>About Investor Mortgage</h1>
+                <p>Your trusted partner in real estate investment financing</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-2">
+                    <div>
+                        <h2>Our Story</h2>
+                        <p>Investor Mortgage has been exclusively focused on serving real estate investors. We understand that investment property financing is fundamentally different from traditional home lending.</p>
+                        
+                        <p>Our team of specialized loan officers has extensive experience financing investment properties, from single-family rentals to commercial developments. We've built our reputation on speed, expertise, and understanding what matters to investors: cash flow, leverage, and timing.</p>
+                        
+                        <p>Today, we're a trusted name in investment property lending, with strong relationships across the investor community, from private investors to syndicators and institutional buyers.</p>
+                    </div>
+                    
+                    <div>
+                        <h2>Our Mission</h2>
+                        <p>To empower real estate investors with fast, flexible financing solutions that help them grow and scale their portfolios.</p>
+                        
+                        <h3 style="margin-top: var(--spacing-md);">Our Values</h3>
+                        <ul class="product-features">
+                            <li><strong>Speed:</strong> We move at the pace of real estate opportunities</li>
+                            <li><strong>Expertise:</strong> Deep knowledge of investment property financing</li>
+                            <li><strong>Transparency:</strong> Clear terms, no hidden fees or surprises</li>
+                            <li><strong>Partnership:</strong> We succeed when our investors succeed</li>
+                            <li><strong>Innovation:</strong> Constantly improving our products and processes</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Why Work With Us</h2>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>Investor-Only Focus</h3>
+                        <p>Unlike traditional mortgage companies, we only finance investment properties. This specialization means faster underwriting, better terms, and loan officers who truly understand your business.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Nationwide Lending</h3>
+                        <p>Licensed in all 50 states, we finance investment properties anywhere in the country. Whether you're investing locally or building a nationwide portfolio, we've got you covered.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Competitive Rates</h3>
+                        <p>Our volume and investor focus allow us to offer some of the most competitive rates in the market. We pass our efficiency savings on to you.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Flexible Programs</h3>
+                        <p>From DSCR loans to hard money, we have financing solutions for every strategy and scenario. If there's a way to make a deal work, we'll find it.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Fast Closings</h3>
+                        <p>We can close most loans in 7-10 days because we understand investors need to move quickly to secure deals. Our streamlined process eliminates unnecessary delays.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Long-Term Relationships</h3>
+                        <p>We're not just here for one loan. Many of our clients have been with us for 10+ years, financing dozens of properties. We grow as you grow.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Our Team</h2>
+                    <p>Experienced professionals dedicated to your success</p>
+                </div>
+                
+                <div class="grid grid-3">
+                    <div class="card">
+                        <h3>Senior Loan Officers</h3>
+                        <p>Average 15+ years in investment property lending. Direct access to decision-makers who can structure creative solutions.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Underwriting Team</h3>
+                        <p>Specialized in investment property analysis. Fast turnaround times without sacrificing thoroughness.</p>
+                    </div>
+                    
+                    <div class="card">
+                        <h3>Closing Coordinators</h3>
+                        <p>Dedicated support ensuring smooth, on-time closings. Available to answer questions throughout the process.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         BLOG PAGE
+         ============================================ -->
+    <div id="blog" class="page">
+        <div class="hero">
+            <div class="container">
+                <h1>Insights & Resources</h1>
+                <p>Educational content and case studies for real estate investors</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="grid grid-3">
+                    <div class="blog-card">
+                        <div class="blog-image">DSCR Guide</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">January 15, 2026 • Education</div>
+                            <h3>Complete Guide to DSCR Loans for Rental Properties</h3>
+                            <p>Everything you need to know about qualifying for rental property financing without tax returns. Learn how DSCR ratios work and what lenders look for.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Case Study</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">January 10, 2026 • Case Study</div>
+                            <h3>How One Investor Scaled from 3 to 15 Properties in 18 Months</h3>
+                            <p>See how strategic use of DSCR loans and portfolio financing helped an investor rapidly scale their rental business.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Market Update</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">January 5, 2026 • Market Analysis</div>
+                            <h3>2026 Investment Property Market Outlook</h3>
+                            <p>Our analysis of market trends, interest rates, and opportunities for real estate investors in the coming year.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Strategy</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">December 28, 2025 • Education</div>
+                            <h3>Fix & Flip vs. BRRRR: Which Strategy is Right for You?</h3>
+                            <p>Compare two popular investment strategies and learn which financing products support each approach.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Success Story</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">December 20, 2025 • Case Study</div>
+                            <h3>$2M Commercial Property Acquisition in 9 Days</h3>
+                            <p>How we helped a client secure bridge financing and close on a time-sensitive commercial opportunity.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Tax Planning</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">December 15, 2025 • Education</div>
+                            <h3>Tax Benefits of Investment Property Ownership</h3>
+                            <p>Understanding depreciation, expense deductions, and how financing impacts your tax strategy.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Portfolio Growth</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">December 10, 2025 • Case Study</div>
+                            <h3>Building a Multifamily Portfolio: 20 Units in 2 Years</h3>
+                            <p>How strategic financing and market selection enabled rapid multifamily portfolio growth.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Market Tips</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">December 5, 2025 • Education</div>
+                            <h3>Emerging Markets for Real Estate Investment in 2026</h3>
+                            <p>Data-driven analysis of growing markets with strong fundamentals for rental property investment.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+
+                    <div class="blog-card">
+                        <div class="blog-image">Renovation</div>
+                        <div class="blog-content">
+                            <div class="blog-meta">November 28, 2025 • Education</div>
+                            <h3>Maximizing ROI on Fix & Flip Projects</h3>
+                            <p>Best practices for budget management, contractor selection, and value-add renovations.</p>
+                            <a href="#" onclick="alert('Full blog post would load here')">Read More →</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         CONTACT PAGE
+         ============================================ -->
+    <div id="contact" class="page">
+        <div class="hero">
+            <div class="container">
+                <h1>Get Started Today</h1>
+                <p>Talk to an investment property specialist</p>
+            </div>
+        </div>
+
+        <section class="section">
+            <div class="container">
+                <div class="contact-grid">
+                    <div>
+                        <h2>Send Us a Message</h2>
+                        <p style="margin-bottom: var(--spacing-md);">Fill out the form and one of our loan officers will contact you within 24 hours.</p>
+                        
+                        <form id="contactForm" name="contact" method="POST" data-netlify="true" onsubmit="handleSubmit(event)">
+                            <input type="hidden" name="form-name" value="contact">
+                            
+                            <div class="form-group">
+                                <label for="name">Full Name *</label>
+                                <input type="text" id="name" name="name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email">Email Address *</label>
+                                <input type="email" id="email" name="email" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="phone">Phone Number *</label>
+                                <input type="tel" id="phone" name="phone" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="product">Product Interest</label>
+                                <select id="product" name="product">
+                                    <option value="">Select a product...</option>
+                                    <option value="dscr">DSCR Loan</option>
+                                    <option value="fix-flip">Fix & Flip</option>
+                                    <option value="bridge">Bridge Loan</option>
+                                    <option value="construction">New Construction</option>
+                                    <option value="multifamily">Multifamily</option>
+                                    <option value="commercial">Commercial</option>
+                                    <option value="portfolio">Portfolio Financing</option>
+                                    <option value="hard-money">Hard Money</option>
+                                    <option value="other">Not Sure / Other</option>
+                                </select>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="message">Tell Us About Your Project *</label>
+                                <textarea id="message" name="message" required placeholder="Property type, location, loan amount needed, timeline, etc."></textarea>
+                            </div>
+                            
+                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
+                        </form>
+                    </div>
+                    
+                    <div class="contact-info">
+                        <h3>Contact Information</h3>
+                        
+                        <div class="contact-item">
+                            <strong>Phone</strong>
+                            <p>(734) 822-0442</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <strong>Email</strong>
+                            <p>info@investormortgagepro.com</p>
+                        </div>
+                        
+                        <div class="contact-item">
+                            <strong>Hours</strong>
+                            <p>Monday - Friday: 8am - 7pm EST<br>
+                            Saturday: 9am - 3pm EST<br>
+                            Sunday: Closed</p>
+                        </div>
+                        
+                        <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
+                            <h4>Fast Response Guarantee</h4>
+                            <p>We respond to all inquiries within 24 hours on business days. For urgent matters, call us directly.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="section section-alt">
+            <div class="container">
+                <div class="section-header">
+                    <h2>Ready to Get Pre-Approved?</h2>
+                    <p>Get a competitive rate quote in minutes</p>
+                </div>
+                <div style="text-align: center;">
+                    <p style="margin-bottom: var(--spacing-sm);">Our streamlined pre-approval process gets you shopping with confidence</p>
+                    <button class="btn btn-primary" onclick="showPage('contact')">Start Pre-Approval</button>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- ============================================
+         FOOTER
+         ============================================ -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>Investor Mortgage</h4>
+                    <p>Specialized financing for real estate investors nationwide.</p>
+                    <p style="margin-top: var(--spacing-sm);">Licensed in 42 states</p>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Products</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('products')">DSCR Loans</a></li>
+                        <li><a href="#" onclick="showPage('products')">Fix & Flip</a></li>
+                        <li><a href="#" onclick="showPage('products')">Bridge Loans</a></li>
+                        <li><a href="#" onclick="showPage('products')">New Construction</a></li>
+                        <li><a href="#" onclick="showPage('products')">Portfolio Financing</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Company</h4>
+                    <ul>
+                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
+                        <li><a href="#" onclick="showPage('blog')">Blog & Resources</a></li>
+                        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
+                        <li><a href="#" onclick="alert('Careers page - Add your job listings here')">Careers</a></li>
+                        <li><a href="#" onclick="alert('Privacy Policy page - Add your privacy policy here')">Privacy Policy</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-section">
+                    <h4>Get in Touch</h4>
+                    <ul>
+                        <li>Phone: (734) 822-0442</li>
+                        <li>Email: info@investormortgagepro.com</li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="footer-bottom">
+                <p>&copy; 2026 Investor Mortgage LLC. All rights reserved. | Licensed in 42 states</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ============================================
+         JAVASCRIPT - PAGE NAVIGATION
+         ============================================ -->
+    <script>
+        // Navigation function
+        function showPage(pageId, event) {
+            // Hide all pages
+            document.querySelectorAll('.page').forEach(page => {
+                page.classList.remove('active');
+            });
+            
+            // Remove active class from all nav links
+            document.querySelectorAll('.nav-link').forEach(link => {
+                link.classList.remove('active');
+            });
+            
+            // Show selected page
+            document.getElementById(pageId).classList.add('active');
+            
+            // Add active class to the nav link for this page
+            const navLink = document.querySelector(`.nav-link[onclick*="${pageId}"]`);
+            if (navLink) {
+                navLink.classList.add('active');
+            }
+            
+            // Close mobile menu if open
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            if (navLinks && navLinks.classList.contains('active')) {
+                navLinks.classList.remove('active');
+                menuToggle.classList.remove('active');
+            }
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+            
+            // Prevent default link behavior
+            if (event) {
+                event.preventDefault();
+            }
+        }
+        
+        // Mobile menu toggle function
+        function toggleMobileMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            const menuToggle = document.querySelector('.mobile-menu-toggle');
+            
+            navLinks.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        }
+        
+        // Form submission handler
+        function handleSubmit(event) {
+            event.preventDefault();
+            
+            const form = event.target;
+            const formData = new FormData(form);
+            
+            // Submit to Netlify
+            fetch('/', {
+                method: 'POST',
+                headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                body: new URLSearchParams(formData).toString()
+            })
+            .then(() => {
+                alert('Thank you for your inquiry! A loan officer will contact you within 24 hours.');
+                form.reset();
+            })
+            .catch((error) => {
+                alert('Oops! There was a problem submitting your form. Please email us directly at info@investormortgagepro.com');
+            });
+        }
+        
+        // Handle direct navigation via URL hash
+        window.addEventListener('load', () => {
+            const hash = window.location.hash.substring(1);
+            if (hash && document.getElementById(hash)) {
+                showPage(hash);
+            }
+        });
+    </script>
+</body>
+</html>
