@@ -1,1539 +1,1514 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Investor Mortgage - Commercial & Investment Property Finance</title>
-    <link rel="icon" type="image/png" href="favicon.png">
-    <link rel="icon" type="image/x-icon" href="favicon.ico">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
-    
-    <style>
-        /* ============================================
-           DESIGN SYSTEM - EASY TO UPDATE
-           Edit these variables to change the entire site
-           ============================================ */
-        :root {
-            /* Colors */
-            --color-primary: #123168;        /* Deep blue */
-            --color-primary-dark: #0d2347;   
-            --color-accent: #c9a961;         /* Warm gold */
-            --color-accent-light: #e5d4a3;
-            --color-text: #2c2c2c;
-            --color-text-light: #6b6b6b;
-            --color-background: #ffffff;
-            --color-background-alt: #f8f9fa;
-            --color-border: #e0e0e0;
-            
-            /* Typography */
-            --font-heading: 'Montserrat', sans-serif;
-            --font-body: 'Montserrat', sans-serif;
-            
-            /* Spacing */
-            --spacing-xs: 0.5rem;
-            --spacing-sm: 1rem;
-            --spacing-md: 2rem;
-            --spacing-lg: 4rem;
-            --spacing-xl: 6rem;
-            
-            /* Layout */
-            --max-width: 1200px;
-            --border-radius: 4px;
-            --transition: all 0.3s ease;
-        }
-        
-        /* ============================================
-           BASE STYLES
-           ============================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
-        body {
-            font-family: var(--font-body);
-            color: var(--color-text);
-            line-height: 1.6;
-            background: var(--color-background);
-        }
-        
-        h1, h2, h3, h4, h5, h6 {
-            font-family: var(--font-heading);
-            font-weight: 600;
-            line-height: 1.2;
-            color: var(--color-primary);
-        }
-        
-        h1 { font-size: 3.5rem; margin-bottom: var(--spacing-md); }
-        h2 { font-size: 2.5rem; margin-bottom: var(--spacing-md); }
-        h3 { font-size: 1.75rem; margin-bottom: var(--spacing-sm); }
-        h4 { font-size: 1.25rem; margin-bottom: var(--spacing-sm); }
-        
-        p { margin-bottom: var(--spacing-sm); }
-        
-        a {
-            color: var(--color-primary);
-            text-decoration: none;
-            transition: var(--transition);
-        }
-        
-        a:hover {
-            color: var(--color-accent);
-        }
-        
-        /* ============================================
-           HEADER & NAVIGATION
-           ============================================ */
-        header {
-            background: var(--color-background);
-            border-bottom: 1px solid var(--color-border);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.05);
-        }
-        
-        nav {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: var(--spacing-sm) var(--spacing-md);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        
-        .logo {
-            font-family: var(--font-heading);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: var(--color-primary);
-        }
-        
-        .logo span {
-            color: var(--color-accent);
-        }
-        
-        .nav-links {
-            display: flex;
-            gap: var(--spacing-md);
-            list-style: none;
-        }
-        
-        .nav-links a {
-            font-weight: 500;
-            padding: var(--spacing-xs) var(--spacing-sm);
-            border-radius: var(--border-radius);
-        }
-        
-        .nav-links a:hover,
-        .nav-links a.active {
-            background: var(--color-background-alt);
-            color: var(--color-primary);
-        }
-        
-        .mobile-menu-toggle {
-            display: none;
-            flex-direction: column;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0.5rem;
-            z-index: 1001;
-        }
-        
-        .mobile-menu-toggle span {
-            width: 25px;
-            height: 3px;
-            background: var(--color-primary);
-            margin: 3px 0;
-            transition: var(--transition);
-            border-radius: 3px;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(1) {
-            transform: rotate(45deg) translate(6px, 6px);
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(2) {
-            opacity: 0;
-        }
-        
-        .mobile-menu-toggle.active span:nth-child(3) {
-            transform: rotate(-45deg) translate(6px, -6px);
-        }
-        
-        /* ============================================
-           LAYOUT COMPONENTS
-           ============================================ */
-        .container {
-            max-width: var(--max-width);
-            margin: 0 auto;
-            padding: 0 var(--spacing-md);
-        }
-        
-        .page {
-            display: none;
-            min-height: 60vh;
-        }
-        
-        .page.active {
-            display: block;
-            animation: fadeIn 0.4s ease;
-        }
-        
-        @keyframes fadeIn {
-            from { opacity: 0; transform: translateY(10px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        
-        .hero {
-            background: linear-gradient(135deg, var(--color-primary) 0%, var(--color-primary-dark) 100%);
-            color: white;
-            padding: var(--spacing-xl) 0;
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-        
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: url('data:image/svg+xml,<svg width="100" height="100" xmlns="http://www.w3.org/2000/svg"><rect width="100" height="100" fill="none"/><path d="M0 0 L100 100 M100 0 L0 100" stroke="rgba(255,255,255,0.03)" stroke-width="1"/></svg>');
-            opacity: 0.5;
-        }
-        
-        .hero h1 {
-            color: white;
-            position: relative;
-            z-index: 1;
-        }
-        
-        .hero p {
-            font-size: 1.25rem;
-            max-width: 700px;
-            margin: 0 auto var(--spacing-md);
-            position: relative;
-            z-index: 1;
-            color: rgba(255,255,255,0.95);
-        }
-        
-        .hero .btn {
-            position: relative;
-            z-index: 1;
-        }
-        
-        .section {
-            padding: var(--spacing-xl) 0;
-        }
-        
-        .section-alt {
-            background: var(--color-background-alt);
-        }
-        
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--spacing-lg);
-        }
-        
-        .section-header p {
-            color: var(--color-text-light);
-            font-size: 1.125rem;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-        
-        /* ============================================
-           BUTTONS
-           ============================================ */
-        .btn {
-            display: inline-block;
-            padding: var(--spacing-sm) var(--spacing-md);
-            border-radius: var(--border-radius);
-            font-weight: 600;
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition);
-            border: none;
-            font-family: var(--font-body);
-            font-size: 1rem;
-        }
-        
-        .btn-primary {
-            background: var(--color-accent);
-            color: var(--color-primary);
-        }
-        
-        .btn-primary:hover {
-            background: var(--color-accent-light);
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(201, 169, 97, 0.3);
-        }
-        
-        .btn-secondary {
-            background: transparent;
-            color: white;
-            border: 2px solid white;
-        }
-        
-        .btn-secondary:hover {
-            background: white;
-            color: var(--color-primary);
-        }
-        
-        /* ============================================
-           GRID LAYOUTS
-           ============================================ */
-        .grid {
-            display: grid;
-            gap: var(--spacing-md);
-        }
-        
-        .grid-2 { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-        .grid-3 { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-        .grid-4 { grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); }
-        
-        /* ============================================
-           CARDS
-           ============================================ */
-        .card {
-            background: white;
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            transition: var(--transition);
-        }
-        
-        .card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            transform: translateY(-4px);
-        }
-        
-        .card h3 {
-            color: var(--color-primary);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .card-icon {
-            width: 60px;
-            height: 60px;
-            background: var(--color-accent);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: var(--spacing-sm);
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: white;
-        }
-        
-        /* ============================================
-           PRODUCT CARDS
-           ============================================ */
-        .product-card {
-            background: white;
-            border: 2px solid var(--color-border);
-            border-radius: var(--border-radius);
-            padding: var(--spacing-md);
-            transition: var(--transition);
-        }
-        
-        .product-card:hover {
-            border-color: var(--color-accent);
-            box-shadow: 0 8px 24px rgba(201, 169, 97, 0.15);
-        }
-        
-        .product-tag {
-            display: inline-block;
-            background: var(--color-primary);
-            color: white;
-            padding: 0.25rem 0.75rem;
-            border-radius: 20px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .product-features {
-            list-style: none;
-            margin-top: var(--spacing-sm);
-        }
-        
-        .product-features li {
-            padding: var(--spacing-xs) 0;
-            border-bottom: 1px solid var(--color-background-alt);
-            color: var(--color-text-light);
-        }
-        
-        .product-features li:before {
-            content: "✓";
-            color: var(--color-accent);
-            font-weight: bold;
-            margin-right: var(--spacing-xs);
-        }
-        
-        /* ============================================
-           BLOG CARDS
-           ============================================ */
-        .blog-card {
-            background: white;
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            overflow: hidden;
-            transition: var(--transition);
-        }
-        
-        .blog-card:hover {
-            box-shadow: 0 8px 24px rgba(0,0,0,0.1);
-            transform: translateY(-4px);
-        }
-        
-        .blog-image {
-            width: 100%;
-            height: 200px;
-            background: linear-gradient(135deg, var(--color-primary), var(--color-accent));
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-family: var(--font-heading);
-            font-size: 1.25rem;
-        }
-        
-        .blog-content {
-            padding: var(--spacing-md);
-        }
-        
-        .blog-meta {
-            color: var(--color-text-light);
-            font-size: 0.875rem;
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .blog-card h3 {
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        /* ============================================
-           CONTACT FORM
-           ============================================ */
-        .contact-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: var(--spacing-lg);
-            align-items: start;
-        }
-        
-        .contact-info {
-            background: var(--color-background-alt);
-            padding: var(--spacing-md);
-            border-radius: var(--border-radius);
-        }
-        
-        .contact-info h3 {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .contact-item {
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .contact-item strong {
-            display: block;
-            color: var(--color-primary);
-            margin-bottom: 0.25rem;
-        }
-        
-        .form-group {
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--color-primary);
-        }
-        
-        input, textarea, select {
-            width: 100%;
-            padding: var(--spacing-sm);
-            border: 1px solid var(--color-border);
-            border-radius: var(--border-radius);
-            font-family: var(--font-body);
-            font-size: 1rem;
-            transition: var(--transition);
-        }
-        
-        input:focus, textarea:focus, select:focus {
-            outline: none;
-            border-color: var(--color-accent);
-            box-shadow: 0 0 0 3px rgba(201, 169, 97, 0.1);
-        }
-        
-        textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-        
-        /* ============================================
-           STATS SECTION
-           ============================================ */
-        .stats {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--spacing-md);
-            text-align: center;
-            padding: var(--spacing-lg) 0;
-        }
-        
-        .stat h3 {
-            font-size: 3rem;
-            color: var(--color-accent);
-            margin-bottom: 0.25rem;
-        }
-        
-        .stat p {
-            color: var(--color-text-light);
-            font-weight: 600;
-        }
-        
-        /* ============================================
-           FOOTER
-           ============================================ */
-        footer {
-            background: var(--color-primary);
-            color: white;
-            padding: var(--spacing-lg) 0 var(--spacing-md);
-            margin-top: var(--spacing-xl);
-        }
-        
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--spacing-lg);
-            margin-bottom: var(--spacing-md);
-        }
-        
-        .footer-section h4 {
-            color: var(--color-accent);
-            margin-bottom: var(--spacing-sm);
-        }
-        
-        .footer-section ul {
-            list-style: none;
-        }
-        
-        .footer-section ul li {
-            margin-bottom: 0.5rem;
-        }
-        
-        .footer-section a {
-            color: rgba(255,255,255,0.8);
-        }
-        
-        .footer-section a:hover {
-            color: var(--color-accent);
-        }
-        
-        .footer-bottom {
-            text-align: center;
-            padding-top: var(--spacing-md);
-            border-top: 1px solid rgba(255,255,255,0.1);
-            color: rgba(255,255,255,0.7);
-        }
-        
-        /* ============================================
-           RESPONSIVE DESIGN
-           ============================================ */
-        @media (max-width: 768px) {
-            h1 { font-size: 2.5rem; }
-            h2 { font-size: 2rem; }
-            
-            .mobile-menu-toggle {
-                display: flex;
-            }
-            
-            .nav-links {
-                position: fixed;
-                top: 73px;
-                right: -100%;
-                width: 100%;
-                max-width: 300px;
-                height: calc(100vh - 73px);
-                background: white;
-                flex-direction: column;
-                padding: var(--spacing-md);
-                gap: 0;
-                box-shadow: -2px 0 10px rgba(0,0,0,0.1);
-                transition: right 0.3s ease;
-                z-index: 999;
-            }
-            
-            .nav-links.active {
-                right: 0;
-            }
-            
-            .nav-links li {
-                width: 100%;
-                margin-bottom: var(--spacing-sm);
-            }
-            
-            .nav-links a {
-                display: block;
-                width: 100%;
-                padding: var(--spacing-sm);
-                border-radius: var(--border-radius);
-            }
-            
-            .hero {
-                padding: var(--spacing-lg) 0;
-            }
-            
-            .section {
-                padding: var(--spacing-lg) 0;
-            }
-            
-            .contact-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .grid-2, .grid-3, .grid-4 {
-                grid-template-columns: 1fr;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            h1 { font-size: 2rem; }
-            h2 { font-size: 1.5rem; }
-            
-            nav {
-                padding: var(--spacing-sm);
-            }
-            
-            .logo {
-                font-size: 1.25rem;
-            }
-        }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Investor Mortgage — Capital for the residential investment sponsor</title>
+<meta name="description" content="Investor Mortgage is a residential investment debt desk providing fix-and-flip, DSCR, new construction, multifamily, and bridge financing across the United States. Underwritten on the deal. Closed on the timeline. Structured for repeat business.">
+<meta property="og:title" content="Investor Mortgage — Capital for the residential investment sponsor">
+<meta property="og:description" content="A residential investment debt desk. Fix-and-flip, DSCR, ground-up, multifamily, bridge. All fifty states.">
+<meta property="og:type" content="website">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Public+Sans:wght@300;400;500;600&display=swap">
+
+<link rel="icon" type="image/svg+xml" href="data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 26 26'><rect width='26' height='26' fill='%235A1E22'/><path d='M7.5 7V19' stroke='%23F7F2E9' stroke-width='1.6' stroke-linecap='square'/><path d='M11.5 19 L11.5 7 L15 14 L18.5 7 L18.5 19' stroke='%23B89968' stroke-width='1.6' fill='none' stroke-linejoin='miter' stroke-linecap='square'/></svg>">
+
+<style>
+/* ============================================================
+   INVESTOR MORTGAGE — Brand tokens
+   Single source of truth. All colors, type, spacing.
+   Palette: Oxblood & Champagne on Bone.
+   ============================================================ */
+:root {
+  /* ── Color (60-30-10) ─────────────────────────────────── */
+  /* 60% canvas */
+  --c-bone:           #F7F2E9;
+  --c-bone-light:     #FAF6EE;
+  --c-bone-warm:      #EFE8DA;
+
+  /* 30% structural anchor */
+  --c-oxblood:        #5A1E22;
+  --c-oxblood-deep:   #3E1417;
+  --c-oxblood-warm:   #6E2A2E;
+
+  /* 10% accent */
+  --c-champagne:      #B89968;
+  --c-champagne-deep: #9C7E4E;
+  --c-champagne-soft: #D4B98C;
+
+  /* Type */
+  --c-ink:            #1A1614;
+  --c-ink-soft:       #2E2823;
+  --c-warm-gray:      #6E665C;
+  --c-warm-gray-soft: #A39B90;
+
+  /* Rules / overlays */
+  --c-rule:           rgba(26, 22, 20, 0.12);
+  --c-rule-strong:    rgba(26, 22, 20, 0.22);
+  --c-rule-light:     rgba(247, 242, 233, 0.18);
+
+  /* ── Typography ───────────────────────────────────────── */
+  --font-display: 'Fraunces', 'Cormorant Garamond', 'Hoefler Text', Georgia, serif;
+  --font-body:    'Public Sans', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+
+  /* ── Layout ───────────────────────────────────────────── */
+  --max-w:        1280px;
+  --gutter:       clamp(1.25rem, 4vw, 2.75rem);
+  --section-pad:  clamp(4.5rem, 9vw, 8.5rem);
+
+  /* ── Motion ───────────────────────────────────────────── */
+  --ease:         cubic-bezier(0.22, 0.61, 0.36, 1);
+  --ease-out:     cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* ============================================================
+   Reset & base
+   ============================================================ */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; -moz-osx-font-smoothing: grayscale; }
+body {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 17px;
+  line-height: 1.6;
+  color: var(--c-ink-soft);
+  background: var(--c-bone);
+  overflow-x: hidden;
+}
+img { max-width: 100%; height: auto; display: block; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+input, select, textarea { font: inherit; color: inherit; }
+
+::selection { background: var(--c-oxblood); color: var(--c-bone); }
+
+/* ============================================================
+   Type utilities
+   ============================================================ */
+.kicker {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--c-champagne-deep);
+}
+.kicker--on-dark { color: var(--c-champagne-soft); }
+
+.eyebrow-rule {
+  display: inline-flex; align-items: center; gap: 14px;
+  color: var(--c-champagne-deep);
+}
+.eyebrow-rule::before {
+  content: ''; width: 32px; height: 1px; background: currentColor;
+}
+.eyebrow-rule--on-dark { color: var(--c-champagne-soft); }
+
+h1, h2, h3, h4 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  color: var(--c-ink);
+  letter-spacing: -0.01em;
+  line-height: 1.1;
+}
+h1 { font-size: clamp(2.5rem, 6.5vw, 5.25rem); font-weight: 400; letter-spacing: -0.025em; line-height: 1.02; }
+h2 { font-size: clamp(2rem, 4.5vw, 3.5rem); letter-spacing: -0.02em; line-height: 1.08; }
+h3 { font-size: clamp(1.4rem, 2.2vw, 1.75rem); line-height: 1.2; }
+h4 { font-size: 1.125rem; line-height: 1.3; }
+
+p { color: var(--c-ink-soft); }
+.lede {
+  font-size: clamp(1.05rem, 1.3vw, 1.2rem);
+  line-height: 1.6;
+  color: var(--c-warm-gray);
+  font-weight: 400;
+}
+
+/* ============================================================
+   Container
+   ============================================================ */
+.container {
+  width: 100%;
+  max-width: var(--max-w);
+  margin: 0 auto;
+  padding: 0 var(--gutter);
+}
+
+/* ============================================================
+   Navigation
+   ============================================================ */
+.nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 50;
+  padding: 1.4rem 0;
+  transition: background 0.4s var(--ease), padding 0.4s var(--ease), border-color 0.4s var(--ease), box-shadow 0.4s var(--ease);
+  border-bottom: 1px solid transparent;
+}
+.nav__inner {
+  display: flex; align-items: center; justify-content: space-between; gap: 2rem;
+}
+.brand {
+  display: flex; align-items: center; gap: 14px;
+  color: var(--c-bone);
+  transition: color 0.4s var(--ease);
+}
+.brand__mark {
+  width: 30px; height: 30px;
+  color: currentColor;
+  flex-shrink: 0;
+  transition: color 0.4s var(--ease);
+}
+.brand__mark .accent { stroke: var(--c-champagne); }
+.brand__word {
+  display: flex; align-items: center; gap: 9px;
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  line-height: 1;
+}
+.brand__pipe {
+  color: var(--c-champagne);
+  font-weight: 300;
+  font-size: 14px;
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.nav__links {
+  display: flex; align-items: center; gap: 2.25rem;
+  list-style: none;
+}
+.nav__link {
+  font-size: 13.5px;
+  font-weight: 500;
+  letter-spacing: 0.04em;
+  color: var(--c-bone);
+  opacity: 0.82;
+  transition: opacity 0.25s var(--ease), color 0.4s var(--ease);
+  position: relative;
+}
+.nav__link:hover { opacity: 1; }
+.nav__link::after {
+  content: ''; position: absolute; left: 0; right: 100%; bottom: -6px;
+  height: 1px; background: var(--c-champagne);
+  transition: right 0.35s var(--ease-out);
+}
+.nav__link:hover::after { right: 0; }
+
+.nav__cta {
+  display: inline-flex; align-items: center; gap: 10px;
+  padding: 11px 22px;
+  font-size: 13px;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  color: var(--c-oxblood-deep);
+  background: var(--c-champagne);
+  transition: background 0.25s var(--ease), transform 0.25s var(--ease), color 0.25s var(--ease);
+}
+.nav__cta:hover { background: var(--c-champagne-soft); transform: translateY(-1px); }
+.nav__cta::after {
+  content: '→'; transition: transform 0.3s var(--ease-out);
+}
+.nav__cta:hover::after { transform: translateX(3px); }
+
+/* Scrolled state */
+.nav.is-scrolled {
+  background: rgba(247, 242, 233, 0.94);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  padding: 0.95rem 0;
+  border-bottom-color: var(--c-rule);
+}
+.nav.is-scrolled .brand,
+.nav.is-scrolled .nav__link { color: var(--c-ink); }
+.nav.is-scrolled .nav__link { opacity: 0.7; }
+.nav.is-scrolled .nav__link:hover { opacity: 1; }
+
+/* Mobile hamburger */
+.nav__toggle {
+  display: none;
+  width: 44px; height: 44px;
+  align-items: center; justify-content: center;
+  color: var(--c-bone);
+  transition: color 0.4s var(--ease);
+}
+.nav.is-scrolled .nav__toggle { color: var(--c-ink); }
+.nav__toggle__bars {
+  position: relative; width: 22px; height: 14px;
+}
+.nav__toggle__bars span {
+  position: absolute; left: 0; right: 0; height: 1.5px;
+  background: currentColor;
+  transition: transform 0.35s var(--ease), opacity 0.2s var(--ease), top 0.35s var(--ease);
+}
+.nav__toggle__bars span:nth-child(1) { top: 0; }
+.nav__toggle__bars span:nth-child(2) { top: 50%; transform: translateY(-50%); }
+.nav__toggle__bars span:nth-child(3) { top: 100%; transform: translateY(-100%); }
+body.menu-open .nav__toggle__bars span:nth-child(1) { top: 50%; transform: translateY(-50%) rotate(45deg); }
+body.menu-open .nav__toggle__bars span:nth-child(2) { opacity: 0; }
+body.menu-open .nav__toggle__bars span:nth-child(3) { top: 50%; transform: translateY(-50%) rotate(-45deg); }
+
+/* Mobile menu overlay */
+.menu-overlay {
+  position: fixed; inset: 0; z-index: 45;
+  background: var(--c-oxblood-deep);
+  display: flex; flex-direction: column; justify-content: center; align-items: center;
+  opacity: 0; visibility: hidden;
+  transition: opacity 0.4s var(--ease), visibility 0.4s var(--ease);
+}
+.menu-overlay::before {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(184, 153, 104, 0.08), transparent 50%),
+    radial-gradient(circle at 70% 80%, rgba(110, 42, 46, 0.4), transparent 50%);
+  pointer-events: none;
+}
+body.menu-open .menu-overlay { opacity: 1; visibility: visible; }
+.menu-overlay__list {
+  list-style: none; text-align: center;
+  display: flex; flex-direction: column; gap: 1.5rem;
+  position: relative; z-index: 1;
+}
+.menu-overlay__link {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 7vw, 3rem);
+  font-weight: 400;
+  color: var(--c-bone);
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease), color 0.25s var(--ease);
+}
+body.menu-open .menu-overlay__link { opacity: 1; transform: translateY(0); }
+body.menu-open .menu-overlay__link:nth-child(1) { transition-delay: 0.15s; }
+body.menu-open .menu-overlay__link:nth-child(2) { transition-delay: 0.22s; }
+body.menu-open .menu-overlay__link:nth-child(3) { transition-delay: 0.29s; }
+body.menu-open .menu-overlay__link:nth-child(4) { transition-delay: 0.36s; }
+body.menu-open .menu-overlay__link:nth-child(5) { transition-delay: 0.43s; }
+.menu-overlay__link:hover { color: var(--c-champagne); }
+.menu-overlay__contact {
+  position: absolute; bottom: 3rem; left: 0; right: 0;
+  text-align: center;
+  color: var(--c-champagne-soft);
+  font-size: 13px; letter-spacing: 0.1em;
+}
+
+/* ============================================================
+   Hero
+   ============================================================ */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex; align-items: flex-end;
+  padding: 9rem 0 5rem;
+  color: var(--c-bone);
+  background:
+    linear-gradient(135deg, var(--c-oxblood-deep) 0%, var(--c-oxblood) 55%, var(--c-oxblood-warm) 100%);
+  overflow: hidden;
+}
+/* Subtle film grain via SVG noise — keeps it from feeling flat */
+.hero::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.03  0 0 0 0.45 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.55'/></svg>");
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+/* Decorative champagne hairline composition */
+.hero::after {
+  content: ''; position: absolute;
+  top: 15%; right: -10%;
+  width: 50%; aspect-ratio: 1;
+  border: 1px solid rgba(184, 153, 104, 0.18);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.hero__inner {
+  position: relative; z-index: 2;
+  width: 100%;
+}
+.hero__kicker {
+  margin-bottom: 2.5rem;
+}
+.hero__headline {
+  color: var(--c-bone);
+  max-width: 17ch;
+  margin-bottom: 2rem;
+}
+.hero__headline em {
+  font-style: italic;
+  color: var(--c-champagne-soft);
+  font-weight: 400;
+}
+.hero__sub {
+  max-width: 56ch;
+  font-size: clamp(1.05rem, 1.4vw, 1.25rem);
+  line-height: 1.6;
+  color: rgba(247, 242, 233, 0.82);
+  margin-bottom: 3rem;
+}
+.hero__actions {
+  display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;
+  margin-bottom: 4.5rem;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 16px 28px;
+  background: var(--c-champagne);
+  color: var(--c-oxblood-deep);
+  font-size: 13.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.btn-primary:hover { background: var(--c-champagne-soft); transform: translateY(-2px); }
+.btn-primary__arrow { transition: transform 0.35s var(--ease-out); }
+.btn-primary:hover .btn-primary__arrow { transform: translateX(4px); }
+
+.btn-ghost {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-size: 13.5px; font-weight: 500;
+  letter-spacing: 0.08em; text-transform: uppercase;
+  color: var(--c-bone);
+  padding-bottom: 4px;
+  border-bottom: 1px solid rgba(247, 242, 233, 0.35);
+  transition: border-color 0.3s var(--ease), color 0.3s var(--ease);
+}
+.btn-ghost:hover { border-color: var(--c-champagne); color: var(--c-champagne-soft); }
+
+.hero__meta {
+  display: flex; gap: clamp(2rem, 5vw, 4.5rem); flex-wrap: wrap;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(184, 153, 104, 0.24);
+  max-width: 720px;
+}
+.hero__meta-item { display: flex; flex-direction: column; gap: 4px; }
+.hero__meta-num {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2vw, 1.85rem);
+  color: var(--c-champagne-soft);
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+.hero__meta-label {
+  font-size: 11.5px; letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: rgba(247, 242, 233, 0.65);
+}
+
+/* ============================================================
+   Stats row
+   ============================================================ */
+.stats {
+  background: var(--c-bone-light);
+  padding: clamp(3.5rem, 6vw, 5.5rem) 0;
+  border-bottom: 1px solid var(--c-rule);
+}
+.stats__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--c-rule);
+}
+.stat {
+  background: var(--c-bone-light);
+  padding: 1rem clamp(1rem, 2.5vw, 2rem) 1rem;
+}
+.stat:first-child { padding-left: 0; }
+.stat:last-child { padding-right: 0; }
+.stat__num {
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 4.5vw, 3.75rem);
+  font-weight: 400;
+  color: var(--c-oxblood);
+  letter-spacing: -0.025em;
+  line-height: 1;
+  margin-bottom: 0.85rem;
+}
+.stat__num sup {
+  font-size: 0.5em; vertical-align: super;
+  color: var(--c-champagne-deep);
+  font-style: italic;
+  margin-left: 4px;
+  letter-spacing: 0;
+}
+.stat__label {
+  font-size: 12px; letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-warm-gray);
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+/* ============================================================
+   Section scaffolding
+   ============================================================ */
+.section { padding: var(--section-pad) 0; }
+.section__head {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: clamp(2rem, 5vw, 5rem);
+  margin-bottom: clamp(3rem, 6vw, 5rem);
+  align-items: end;
+}
+.section__head-left .kicker { display: block; margin-bottom: 1.5rem; }
+.section__head h2 { margin-bottom: 0; }
+.section__head-right { padding-bottom: 0.5rem; }
+
+/* ============================================================
+   Products
+   ============================================================ */
+.products { background: var(--c-bone); }
+.products__grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1px;
+  background: var(--c-rule);
+  border: 1px solid var(--c-rule);
+}
+.product {
+  background: var(--c-bone);
+  padding: clamp(2rem, 3.5vw, 3rem);
+  display: flex; flex-direction: column;
+  position: relative;
+  transition: background 0.4s var(--ease);
+  min-height: 320px;
+}
+.product:hover { background: var(--c-bone-warm); }
+.product__head {
+  display: flex; align-items: flex-start; justify-content: space-between;
+  margin-bottom: 1.75rem;
+}
+.product__num {
+  font-family: var(--font-display);
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--c-champagne-deep);
+  letter-spacing: 0.04em;
+  font-feature-settings: "tnum";
+}
+.product__icon {
+  width: 32px; height: 32px;
+  border: 1px solid var(--c-rule-strong);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--c-oxblood);
+  transition: border-color 0.3s var(--ease), background 0.3s var(--ease);
+}
+.product:hover .product__icon {
+  border-color: var(--c-champagne);
+  background: var(--c-champagne);
+  color: var(--c-oxblood-deep);
+}
+.product__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+  font-weight: 500;
+  color: var(--c-ink);
+  margin-bottom: 1.25rem;
+  letter-spacing: -0.015em;
+}
+.product__copy {
+  font-size: 15.5px;
+  line-height: 1.65;
+  color: var(--c-warm-gray);
+  margin-bottom: auto;
+  max-width: 48ch;
+}
+.product__footer {
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--c-rule);
+  font-size: 12px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--c-oxblood);
+  font-weight: 500;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.product__footer span:last-child {
+  font-family: var(--font-display);
+  text-transform: none;
+  letter-spacing: 0;
+  font-style: italic;
+  color: var(--c-warm-gray);
+  font-weight: 400;
+  font-size: 14px;
+}
+/* Fifth product spans full width when grid is 2 cols */
+.product--wide { grid-column: 1 / -1; }
+.product--wide .product__copy { max-width: 72ch; }
+
+/* ============================================================
+   Approach
+   ============================================================ */
+.approach {
+  background: var(--c-oxblood-deep);
+  color: var(--c-bone);
+  position: relative;
+  overflow: hidden;
+}
+.approach::before {
+  content: ''; position: absolute; inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='240' height='240'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/><feColorMatrix values='0 0 0 0 0.05  0 0 0 0 0.04  0 0 0 0 0.03  0 0 0 0.45 0'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.45'/></svg>");
+  opacity: 0.5;
+  mix-blend-mode: overlay;
+  pointer-events: none;
+}
+.approach .container { position: relative; z-index: 1; }
+.approach h2 { color: var(--c-bone); }
+.approach .lede { color: rgba(247, 242, 233, 0.78); max-width: 60ch; }
+.approach__grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: clamp(3rem, 6vw, 6rem);
+  align-items: start;
+}
+.pillars { display: flex; flex-direction: column; gap: 2.75rem; }
+.pillar {
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(184, 153, 104, 0.3);
+}
+.pillar__num {
+  font-family: var(--font-display);
+  font-size: 13px;
+  color: var(--c-champagne-soft);
+  letter-spacing: 0.04em;
+  font-style: italic;
+  margin-bottom: 1rem;
+  display: block;
+}
+.pillar__title {
+  font-family: var(--font-display);
+  font-size: clamp(1.5rem, 2.4vw, 1.95rem);
+  font-weight: 400;
+  color: var(--c-bone);
+  margin-bottom: 1rem;
+  letter-spacing: -0.015em;
+  line-height: 1.15;
+}
+.pillar__copy {
+  font-size: 16px;
+  line-height: 1.7;
+  color: rgba(247, 242, 233, 0.72);
+  max-width: 52ch;
+}
+
+.approach__visual {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  background:
+    linear-gradient(155deg, var(--c-oxblood-warm) 0%, var(--c-oxblood) 50%, var(--c-oxblood-deep) 100%);
+  overflow: hidden;
+}
+.approach__visual::after {
+  content: ''; position: absolute; inset: 0;
+  background:
+    radial-gradient(circle at 30% 20%, rgba(184, 153, 104, 0.18), transparent 55%),
+    radial-gradient(circle at 75% 85%, rgba(62, 20, 23, 0.55), transparent 50%);
+  pointer-events: none;
+}
+.approach__visual img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  opacity: 0.65;
+  filter: grayscale(35%) contrast(1.05);
+  mix-blend-mode: luminosity;
+}
+.approach__visual img.is-broken { display: none; }
+.approach__visual-caption {
+  position: absolute;
+  bottom: 0; left: 0; right: 0;
+  padding: 2rem;
+  background: linear-gradient(0deg, rgba(26, 22, 20, 0.5), transparent);
+  z-index: 2;
+  color: var(--c-champagne-soft);
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  line-height: 1.5;
+  max-width: 32ch;
+}
+
+/* ============================================================
+   About / Differentiators
+   ============================================================ */
+.about { background: var(--c-bone); }
+.about__head { max-width: 60ch; margin-bottom: 4rem; }
+.about__head h2 { margin-bottom: 1.5rem; }
+.about__head .lede { font-size: clamp(1.1rem, 1.4vw, 1.3rem); }
+
+.diffs {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--c-rule);
+  border-bottom: 1px solid var(--c-rule);
+}
+.diff {
+  padding: 3rem clamp(1.5rem, 3vw, 2.5rem) 3rem 0;
+  position: relative;
+}
+.diff + .diff { padding-left: clamp(1.5rem, 3vw, 2.5rem); border-left: 1px solid var(--c-rule); }
+.diff__label {
+  font-family: var(--font-display);
+  font-size: 14px;
+  font-style: italic;
+  color: var(--c-champagne-deep);
+  margin-bottom: 0.75rem;
+}
+.diff__title {
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  font-weight: 500;
+  color: var(--c-ink);
+  margin-bottom: 1rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+}
+.diff__copy {
+  font-size: 15px;
+  line-height: 1.65;
+  color: var(--c-warm-gray);
+}
+
+/* ============================================================
+   Contact
+   ============================================================ */
+.contact {
+  background: var(--c-bone-warm);
+  padding: var(--section-pad) 0;
+}
+.contact__grid {
+  display: grid;
+  grid-template-columns: 1fr 1.3fr;
+  gap: clamp(2.5rem, 6vw, 6rem);
+  align-items: start;
+}
+.contact__head h2 { margin-bottom: 1.5rem; }
+.contact__head .lede { margin-bottom: 3rem; max-width: 40ch; }
+
+.contact__details { display: flex; flex-direction: column; gap: 1.75rem; padding-top: 2.5rem; border-top: 1px solid var(--c-rule); }
+.contact__detail { display: flex; flex-direction: column; gap: 6px; }
+.contact__detail-label {
+  font-size: 11.5px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-warm-gray);
+  font-weight: 500;
+}
+.contact__detail-value {
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  color: var(--c-ink);
+  font-weight: 500;
+  letter-spacing: -0.005em;
+}
+.contact__detail-value a:hover { color: var(--c-oxblood); }
+
+/* Form */
+.form { display: flex; flex-direction: column; gap: 1.4rem; }
+.form__row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.4rem;
+}
+.field { display: flex; flex-direction: column; gap: 8px; }
+.field label {
+  font-size: 11.5px; letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-warm-gray);
+  font-weight: 500;
+}
+.field input,
+.field select,
+.field textarea {
+  padding: 14px 0;
+  background: transparent;
+  border: none;
+  border-bottom: 1px solid var(--c-rule-strong);
+  font-size: 16px;
+  color: var(--c-ink);
+  font-family: var(--font-body);
+  outline: none;
+  transition: border-color 0.3s var(--ease);
+  border-radius: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.field select {
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1L6 6L11 1' stroke='%235A1E22' stroke-width='1.4'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right center;
+  padding-right: 24px;
+}
+.field textarea { resize: vertical; min-height: 120px; line-height: 1.55; }
+.field input:focus,
+.field select:focus,
+.field textarea:focus { border-bottom-color: var(--c-oxblood); }
+.field input::placeholder,
+.field textarea::placeholder { color: var(--c-warm-gray-soft); }
+
+.form__submit {
+  margin-top: 1rem;
+  align-self: flex-start;
+  display: inline-flex; align-items: center; gap: 14px;
+  padding: 16px 30px;
+  background: var(--c-oxblood);
+  color: var(--c-bone);
+  font-size: 13px; font-weight: 500;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  transition: background 0.3s var(--ease), transform 0.3s var(--ease);
+}
+.form__submit:hover { background: var(--c-oxblood-warm); transform: translateY(-2px); }
+.form__submit::after { content: '→'; transition: transform 0.3s var(--ease-out); }
+.form__submit:hover::after { transform: translateX(4px); }
+
+.form__confirm {
+  display: none;
+  padding: 1.25rem 1.5rem;
+  background: var(--c-oxblood);
+  color: var(--c-bone);
+  font-size: 14.5px;
+  border-left: 3px solid var(--c-champagne);
+}
+.form__confirm.is-visible { display: block; }
+
+.form__note {
+  font-size: 12.5px;
+  color: var(--c-warm-gray);
+  line-height: 1.5;
+  font-style: italic;
+  margin-top: 0.5rem;
+}
+
+/* ============================================================
+   Footer
+   ============================================================ */
+.footer {
+  background: var(--c-oxblood-deep);
+  color: rgba(247, 242, 233, 0.78);
+  padding: clamp(3rem, 5vw, 4.5rem) 0 2rem;
+  font-size: 13.5px;
+}
+.footer__top {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
+  padding-bottom: 3rem;
+  border-bottom: 1px solid rgba(184, 153, 104, 0.2);
+  margin-bottom: 2rem;
+}
+.footer .brand { color: var(--c-bone); margin-bottom: 1.25rem; }
+.footer__tag {
+  font-family: var(--font-display);
+  font-style: italic;
+  font-size: 15px;
+  color: var(--c-champagne-soft);
+  max-width: 30ch;
+  line-height: 1.5;
+}
+.footer__col h5 {
+  font-family: var(--font-body);
+  font-size: 11.5px;
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--c-champagne-soft);
+  margin-bottom: 1.25rem;
+}
+.footer__col ul { list-style: none; display: flex; flex-direction: column; gap: 0.65rem; }
+.footer__col a { transition: color 0.25s var(--ease); }
+.footer__col a:hover { color: var(--c-champagne); }
+.footer__bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px;
+  color: rgba(247, 242, 233, 0.5);
+  flex-wrap: wrap; gap: 1rem;
+}
+.footer__bottom-fine {
+  max-width: 70ch;
+  line-height: 1.5;
+}
+
+/* ============================================================
+   Reveal on scroll
+   ============================================================ */
+.reveal {
+  opacity: 0;
+  transform: translateY(28px);
+  transition: opacity 0.9s var(--ease-out), transform 0.9s var(--ease-out);
+}
+.reveal.in-view { opacity: 1; transform: translateY(0); }
+.reveal[data-delay="1"] { transition-delay: 0.08s; }
+.reveal[data-delay="2"] { transition-delay: 0.16s; }
+.reveal[data-delay="3"] { transition-delay: 0.24s; }
+.reveal[data-delay="4"] { transition-delay: 0.32s; }
+.reveal[data-delay="5"] { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; transition-duration: 0.01ms !important; }
+}
+
+/* ============================================================
+   Responsive
+   ============================================================ */
+@media (max-width: 1024px) {
+  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+  .stat { padding: 1.25rem; }
+  .stat:first-child, .stat:last-child { padding: 1.25rem; }
+  .diffs { grid-template-columns: 1fr; }
+  .diff + .diff { padding-left: 0; border-left: none; border-top: 1px solid var(--c-rule); }
+  .diff { padding: 2.5rem 0; }
+  .approach__grid { grid-template-columns: 1fr; }
+  .approach__visual { aspect-ratio: 16 / 10; max-width: 100%; }
+  .contact__grid { grid-template-columns: 1fr; }
+  .section__head { grid-template-columns: 1fr; gap: 1.25rem; }
+  .section__head-right { padding-bottom: 0; }
+  .footer__top { grid-template-columns: 1fr 1fr; }
+}
+
+@media (max-width: 768px) {
+  body { font-size: 16px; }
+  .nav__links, .nav__cta { display: none; }
+  .nav__toggle { display: inline-flex; }
+  .products__grid { grid-template-columns: 1fr; }
+  .product { min-height: 0; }
+  .stats__grid { grid-template-columns: 1fr 1fr; }
+  .hero { padding: 7rem 0 4rem; }
+  .hero__meta { gap: 1.5rem 2.5rem; }
+  .form__row { grid-template-columns: 1fr; }
+  .footer__top { grid-template-columns: 1fr; }
+  .footer__bottom { flex-direction: column; align-items: flex-start; }
+}
+
+@media (max-width: 480px) {
+  .stats__grid { grid-template-columns: 1fr; }
+  .stat { padding: 1rem 0; }
+  .stat:first-child, .stat:last-child { padding: 1rem 0; }
+  .hero__actions { flex-direction: column; align-items: flex-start; gap: 1.25rem; }
+}
+</style>
 </head>
 <body>
-    <!-- ============================================
-         HEADER & NAVIGATION
-         ============================================ -->
-    <header>
-        <nav>
-            <a href="#home" onclick="showPage('home')" style="text-decoration: none;">
-                <div class="logo">Investor <span>Mortgage</span></div>
-            </a>
-            
-            <button class="mobile-menu-toggle" onclick="toggleMobileMenu()" aria-label="Toggle menu">
-                <span></span>
-                <span></span>
-                <span></span>
-            </button>
-            
-            <ul class="nav-links">
-                <li><a href="#home" class="nav-link active" onclick="showPage('home')">Home</a></li>
-                <li><a href="#products" class="nav-link" onclick="showPage('products')">Financing</a></li>
-                <li><a href="#about" class="nav-link" onclick="showPage('about')">About</a></li>
-                <li><a href="#blog" class="nav-link" onclick="showPage('blog')">Blog</a></li>
-                <li><a href="#contact" class="nav-link" onclick="showPage('contact')">Contact</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <!-- ============================================
-         HOME PAGE
-         ============================================ -->
-    <div id="home" class="page active">
-        <div class="hero">
-            <div class="container">
-                <h1>Commercial & Investment<br>Property Finance</h1>
-                <p>Relationship-focused financing for real estate investors and developers. From $75K to $40M, we structure solutions that work for your business.</p>
-                <button class="btn btn-secondary" onclick="showPage('contact')">Get Started</button>
-            </div>
-        </div>
+<!-- ============================================================
+     Navigation
+     ============================================================ -->
+<nav class="nav" id="nav">
+  <div class="container nav__inner">
+    <a href="#top" class="brand" aria-label="Investor Mortgage home">
+      <svg class="brand__mark" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+        <rect x="0.5" y="0.5" width="25" height="25" stroke="currentColor" stroke-opacity="0.55"/>
+        <path d="M7.5 7V19" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+        <path class="accent" d="M11.5 19 L11.5 7 L15 14 L18.5 7 L18.5 19" stroke-width="1.4" stroke-linejoin="miter" stroke-linecap="square"/>
+      </svg>
+      <span class="brand__word">
+        <span>INVESTOR</span>
+        <span class="brand__pipe">|</span>
+        <span>MORTGAGE</span>
+      </span>
+    </a>
 
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Commercial Real Estate Loans</h2>
-                    <p>$500K - $40M | All asset classes | Pricing scales with deal size</p>
-                </div>
-                
-                <div class="grid grid-4">
-                    <div class="card">
-                        <h4>Office Buildings</h4>
-                        <p>Class A, B, and C office properties</p>
-                    </div>
-                    <div class="card">
-                        <h4>Retail Centers</h4>
-                        <p>Strip malls, shopping centers, standalone retail</p>
-                    </div>
-                    <div class="card">
-                        <h4>Industrial/Warehouse</h4>
-                        <p>Distribution, manufacturing, flex space</p>
-                    </div>
-                    <div class="card">
-                        <h4>Multifamily (5+ Units)</h4>
-                        <p>Apartment buildings and complexes</p>
-                    </div>
-                    <div class="card">
-                        <h4>Mixed-Use</h4>
-                        <p>Combined residential and commercial</p>
-                    </div>
-                    <div class="card">
-                        <h4>Hospitality</h4>
-                        <p>Hotels, motels, extended stay</p>
-                    </div>
-                    <div class="card">
-                        <h4>Self-Storage</h4>
-                        <p>Climate and non-climate controlled facilities</p>
-                    </div>
-                    <div class="card">
-                        <h4>Special Purpose</h4>
-                        <p>Medical, daycare, car washes, and more</p>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: var(--spacing-md);">
-                    <p style="color: var(--color-text-light); margin-bottom: var(--spacing-sm);">Minimum $500K (minimum fee may apply)</p>
-                </div>
-            </div>
-        </section>
+    <ul class="nav__links">
+      <li><a href="#products" class="nav__link">Products</a></li>
+      <li><a href="#approach" class="nav__link">Approach</a></li>
+      <li><a href="#about" class="nav__link">About</a></li>
+      <li><a href="#contact" class="nav__link">Contact</a></li>
+    </ul>
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Investment Property Loans</h2>
-                    <p>$75K - $40M | Fast closings for fix & flip, bridge, and construction financing</p>
-                </div>
-                
-                <div class="grid grid-3">
-                    <div class="card">
-                        <div class="card-icon">🔨</div>
-                        <h3>Fix & Flip</h3>
-                        <p>Short-term financing for renovation projects. Up to 75% ARV and 100% LTC.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🌉</div>
-                        <h3>Bridge Loans</h3>
-                        <p>Quick capital for time-sensitive opportunities. Close in 7-14 days.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🏗️</div>
-                        <h3>Construction</h3>
-                        <p>Ground-up development and major renovation financing.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">🏘️</div>
-                        <h3>New Construction</h3>
-                        <p>Land acquisition plus construction costs in one loan.</p>
-                    </div>
-                    <div class="card">
-                        <div class="card-icon">💳</div>
-                        <h3>Line of Credit</h3>
-                        <p>Revolving credit line for multiple projects. Draw as needed.</p>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: var(--spacing-md);">
-                    <p style="color: var(--color-text-light); margin-bottom: var(--spacing-sm);">Minimum $75K (minimum fee may apply)</p>
-                    <button class="btn btn-primary" onclick="showPage('products')">View All Products</button>
-                </div>
-            </div>
-        </section>
+    <a href="#contact" class="nav__cta">Discuss a deal</a>
 
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Why Investor Mortgage</h2>
-                </div>
-                
-                <div class="grid grid-3">
-                    <div class="card">
-                        <h3>Relationship-Focused</h3>
-                        <p>We build long-term partnerships, not one-time transactions. Your success is our success.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Proven Track Record</h3>
-                        <p>Hundreds of millions underwritten across commercial and investment properties.</p>
-                    </div>
-                    <div class="card">
-                        <h3>5+ Years in the Industry</h3>
-                        <p>Deep market knowledge and strong lender relationships across the country.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Competitive Fee Structure</h3>
-                        <p>Transparent pricing with better efficiencies as deal size increases.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Fast Execution</h3>
-                        <p>Pre-approvals in 48 hours. Most deals close in 30-45 days.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Flexible Solutions</h3>
-                        <p>We structure financing that fits your investment strategy and timeline.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <button class="nav__toggle" id="navToggle" aria-label="Open menu" aria-expanded="false">
+      <span class="nav__toggle__bars" aria-hidden="true">
+        <span></span><span></span><span></span>
+      </span>
+    </button>
+  </div>
+</nav>
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2>How We Work</h2>
-                    <p>A simple, efficient process built on relationships</p>
-                </div>
-                
-                <div class="grid grid-3">
-                    <div class="card">
-                        <h3>1. Consultation</h3>
-                        <p>We start by understanding your project, goals, and timeline. Every deal is different, and we take the time to learn what matters to you.</p>
-                    </div>
-                    <div class="card">
-                        <h3>2. Structure</h3>
-                        <p>We design the optimal financing solution, leveraging our lender relationships to get you the best terms for your specific situation.</p>
-                    </div>
-                    <div class="card">
-                        <h3>3. Execute</h3>
-                        <p>We manage the process from application to closing, keeping you informed every step of the way. No surprises, just results.</p>
-                    </div>
-                </div>
-                
-                <div style="text-align: center; margin-top: var(--spacing-lg);">
-                    <button class="btn btn-primary" onclick="showPage('contact')">Start Your Project</button>
-                </div>
-            </div>
-        </section>
+<!-- Mobile menu overlay -->
+<div class="menu-overlay" id="menuOverlay" role="dialog" aria-modal="true" aria-label="Site navigation">
+  <ul class="menu-overlay__list">
+    <li><a href="#products" class="menu-overlay__link" data-menu-link>Products</a></li>
+    <li><a href="#approach" class="menu-overlay__link" data-menu-link>Approach</a></li>
+    <li><a href="#about" class="menu-overlay__link" data-menu-link>About</a></li>
+    <li><a href="#contact" class="menu-overlay__link" data-menu-link>Contact</a></li>
+    <li><a href="#contact" class="menu-overlay__link" data-menu-link>Discuss a deal</a></li>
+  </ul>
+  <div class="menu-overlay__contact">
+    XXX-XXX-XXXX &nbsp;·&nbsp; info@investormortgage.io
+  </div>
+</div>
+
+<!-- ============================================================
+     Hero
+     ============================================================ -->
+<header class="hero" id="top">
+  <div class="container hero__inner">
+    <div class="hero__kicker reveal">
+      <span class="kicker eyebrow-rule eyebrow-rule--on-dark">Residential investment financing · United States</span>
     </div>
 
-    <!-- ============================================
-         CONTACT PAGE
-         ============================================ -->
+    <h1 class="hero__headline reveal" data-delay="1">
+      Capital for the<br>
+      residential investment<br>
+      <em>sponsor.</em>
+    </h1>
 
-    <!-- ============================================
-         PRODUCTS/FINANCING PAGE
-         ============================================ -->
-    <div id="products" class="page">
-        <div class="hero">
-            <div class="container">
-                <h1>Financing Solutions</h1>
-                <p>Commercial and investment property loans from $75K to $40M</p>
-            </div>
-        </div>
+    <p class="hero__sub reveal" data-delay="2">
+      Fix-and-flip bridge, DSCR rental, ground-up construction, and small-balance multifamily &mdash;
+      underwritten on the deal, closed on the timeline, structured for the next loan.
+    </p>
 
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Commercial Real Estate</h2>
-                    <p>$500K to $40M | All asset classes | Pricing scales with deal size</p>
-                </div>
-                
-                <div style="background: var(--color-background-alt); padding: var(--spacing-lg); border-radius: var(--border-radius); margin-bottom: var(--spacing-lg);">
-                    <h3 style="margin-bottom: var(--spacing-md);">Asset Classes</h3>
-                    <div class="grid grid-4">
-                        <div class="card">
-                            <h4>Office</h4>
-                            <p>Class A, B, and C properties</p>
-                        </div>
-                        <div class="card">
-                            <h4>Retail</h4>
-                            <p>Centers, strip malls, standalone</p>
-                        </div>
-                        <div class="card">
-                            <h4>Industrial</h4>
-                            <p>Warehouse, distribution, flex</p>
-                        </div>
-                        <div class="card">
-                            <h4>Multifamily</h4>
-                            <p>5+ unit apartment buildings</p>
-                        </div>
-                        <div class="card">
-                            <h4>Mixed-Use</h4>
-                            <p>Residential + commercial</p>
-                        </div>
-                        <div class="card">
-                            <h4>Hospitality</h4>
-                            <p>Hotels, motels, extended stay</p>
-                        </div>
-                        <div class="card">
-                            <h4>Self-Storage</h4>
-                            <p>All facility types</p>
-                        </div>
-                        <div class="card">
-                            <h4>Special Purpose</h4>
-                            <p>Medical, daycare, carwash</p>
-                        </div>
-                    </div>
-                </div>
-
-                <div style="background: white; padding: var(--spacing-lg); border: 2px solid var(--color-accent); border-radius: var(--border-radius); margin-bottom: var(--spacing-lg);">
-                    <h3 style="margin-bottom: var(--spacing-md);">Debt Structures</h3>
-                    <div class="grid grid-3">
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Acquisition</h4>
-                            <p>Purchase financing, all asset classes</p>
-                        </div>
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Bridge</h4>
-                            <p>Transitional, value-add financing</p>
-                        </div>
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Term</h4>
-                            <p>Permanent financing, stabilized assets</p>
-                        </div>
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Fixed Rate</h4>
-                            <p>Rate certainty, predictable payments</p>
-                        </div>
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Floating Rate</h4>
-                            <p>Index-based, often with rate caps</p>
-                        </div>
-                        <div class="card" style="border: 1px solid var(--color-border);">
-                            <h4>Construction</h4>
-                            <p>Ground-up and major renovation</p>
-                        </div>
-                    </div>
-                    
-                    <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
-                        <p><strong>Loan Range:</strong> $500K - $40M (minimum fee may apply)</p>
-                        <p style="margin-top: var(--spacing-sm);"><strong>Pricing:</strong> Better economics at scale</p>
-                        <p style="margin-top: var(--spacing-sm);"><strong>Timeline:</strong> Pre-approvals in 48 hours | Closings typically 30-45 days</p>
-                    </div>
-                </div>
-
-                <div style="background: var(--color-primary); color: white; padding: var(--spacing-lg); border-radius: var(--border-radius);">
-                    <h3 style="color: var(--color-accent); margin-bottom: var(--spacing-md);">Capital Markets</h3>
-                    <p>Access to institutional and private capital sources for complex commercial transactions. We structure creative financing solutions leveraging our deep lender relationships.</p>
-                    <div class="grid grid-3" style="margin-top: var(--spacing-md);">
-                        <div style="padding: var(--spacing-sm);">
-                            <h4 style="color: white; font-size: 1rem;">Institutional Debt</h4>
-                            <p style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Life companies, CMBS, debt funds</p>
-                        </div>
-                        <div style="padding: var(--spacing-sm);">
-                            <h4 style="color: white; font-size: 1rem;">Private Credit</h4>
-                            <p style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Family offices, direct lenders</p>
-                        </div>
-                        <div style="padding: var(--spacing-sm);">
-                            <h4 style="color: white; font-size: 1rem;">Structured Finance</h4>
-                            <p style="font-size: 0.875rem; color: rgba(255,255,255,0.9);">Mezzanine, preferred equity, JV</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Investment Property Loans</h2>
-                    <p>$75K to $40M for fix & flip, bridge, and construction</p>
-                </div>
-                
-                <div class="grid grid-2">
-                    <div class="product-card">
-                        <span class="product-tag">FIX & FLIP</span>
-                        <h3>Renovation Financing</h3>
-                        <p>Purchase and rehab in one loan. Up to 75% ARV and 100% LTC.</p>
-                        
-                        <ul class="product-features">
-                            <li>6-12 month terms</li>
-                            <li>Interest-only payments</li>
-                            <li>Flexible draw schedules</li>
-                            <li>Close in 7-10 days</li>
-                        </ul>
-                        
-                        <p style="margin-top: var(--spacing-sm); font-size: 0.875rem; color: var(--color-text-light);">Min $75K (min fee may apply)</p>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="product-tag">BRIDGE</span>
-                        <h3>Bridge Loans</h3>
-                        <p>Short-term capital for time-sensitive opportunities.</p>
-                        
-                        <ul class="product-features">
-                            <li>7-14 day closings</li>
-                            <li>Up to 75% LTV</li>
-                            <li>6-24 month terms</li>
-                            <li>Flexible underwriting</li>
-                        </ul>
-                        
-                        <p style="margin-top: var(--spacing-sm); font-size: 0.875rem; color: var(--color-text-light);">Min $75K (min fee may apply)</p>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="product-tag">CONSTRUCTION</span>
-                        <h3>Construction Financing</h3>
-                        <p>Ground-up and major renovation projects.</p>
-                        
-                        <ul class="product-features">
-                            <li>Land + construction costs</li>
-                            <li>Progress-based draws</li>
-                            <li>12-24 month terms</li>
-                            <li>Commercial and residential</li>
-                        </ul>
-                        
-                        <p style="margin-top: var(--spacing-sm); font-size: 0.875rem; color: var(--color-text-light);">Min $75K (min fee may apply)</p>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="product-tag">NEW CONSTRUCTION</span>
-                        <h3>Development Loans</h3>
-                        <p>Ground-up residential and light commercial.</p>
-                        
-                        <ul class="product-features">
-                            <li>Land acquisition + build</li>
-                            <li>Single-family & small multifamily</li>
-                            <li>12-18 month terms</li>
-                            <li>Spec or pre-sold</li>
-                        </ul>
-                        
-                        <p style="margin-top: var(--spacing-sm); font-size: 0.875rem; color: var(--color-text-light);">Min $75K (min fee may apply)</p>
-                    </div>
-
-                    <div class="product-card">
-                        <span class="product-tag">LINE OF CREDIT</span>
-                        <h3>Revolving Credit</h3>
-                        <p>Draw as needed for multiple projects.</p>
-                        
-                        <ul class="product-features">
-                            <li>Pay interest only on balance used</li>
-                            <li>Reusable credit line</li>
-                            <li>Fast capital access</li>
-                            <li>Flexible repayment</li>
-                        </ul>
-                        
-                        <p style="margin-top: var(--spacing-sm); font-size: 0.875rem; color: var(--color-text-light);">Min $75K (min fee may apply)</p>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="section">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Need Guidance?</h2>
-                    <p>We'll help structure the right financing for your project</p>
-                </div>
-                <div style="text-align: center;">
-                    <button class="btn btn-primary" onclick="showPage('contact')">Schedule a Consultation</button>
-                </div>
-            </div>
-        </section>
+    <div class="hero__actions reveal" data-delay="3">
+      <a href="#contact" class="btn-primary">
+        Discuss a deal
+        <span class="btn-primary__arrow" aria-hidden="true">→</span>
+      </a>
+      <a href="#products" class="btn-ghost">
+        View the platform
+      </a>
     </div>
 
-    <!-- ============================================
-         ABOUT PAGE
-         ============================================ -->
-    <div id="about" class="page">
-        <div class="hero">
-            <div class="container">
-                <h1>About Investor Mortgage</h1>
-                <p>Relationship-focused commercial and investment property finance</p>
-            </div>
-        </div>
+    <div class="hero__meta reveal" data-delay="4">
+      <div class="hero__meta-item">
+        <span class="hero__meta-num">Nationwide</span>
+        <span class="hero__meta-label">Operating across the country</span>
+      </div>
+      <div class="hero__meta-item">
+        <span class="hero__meta-num">5 products</span>
+        <span class="hero__meta-label">Across the investment stack</span>
+      </div>
+      <div class="hero__meta-item">
+        <span class="hero__meta-num">12 days</span>
+        <span class="hero__meta-label">Median close-to-fund</span>
+      </div>
+    </div>
+  </div>
+</header>
 
-        <section class="section">
-            <div class="container">
-                <div class="grid grid-2" style="align-items: start; gap: var(--spacing-lg);">
-                    <div>
-                        <h2>Our Story</h2>
-                        <p>Investor Mortgage specializes in commercial and investment property financing. We understand that real estate finance is about more than just numbers—it's about relationships, trust, and understanding your business.</p>
-                        
-                        <p>With hundreds of millions underwritten and 5+ years serving investors and developers across 42 states, we've built our reputation on delivering creative financing solutions and exceptional service.</p>
-                        
-                        <p>We're a relationship-focused shop. That means we take the time to understand your goals, structure deals that make sense for your business, and support you through multiple transactions as your portfolio grows.</p>
-                        
-                        <h3 style="margin-top: var(--spacing-md);">Our Approach</h3>
-                        <p>Every deal is different. We don't believe in cookie-cutter solutions. Instead, we leverage our lender relationships and capital markets expertise to structure the right solution for your specific situation.</p>
-                        
-                        <p>Whether you're acquiring a $5M retail center, developing multifamily, or flipping residential properties, we bring the same commitment to understanding your business and delivering results.</p>
-                    </div>
-                    
-                    <div>
-                        <div style="background: var(--color-background-alt); padding: var(--spacing-md); border-radius: var(--border-radius); text-align: center;">
-                            <div style="width: 220px; height: 220px; margin: 0 auto var(--spacing-md); background: var(--color-border); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--color-text-light); font-size: 0.875rem; flex-direction: column; padding: var(--spacing-md);">
-                                <div style="font-size: 3rem; margin-bottom: var(--spacing-sm);">📷</div>
-                                <div>Add Your Headshot</div>
-                                <div style="font-size: 0.75rem; margin-top: 0.5rem;">(Replace this placeholder)</div>
-                            </div>
-                            <h3 style="margin-bottom: var(--spacing-xs);">Your Name</h3>
-                            <p style="color: var(--color-accent); font-weight: 600; margin-bottom: var(--spacing-md);">Principal</p>
-                            
-                            <div style="text-align: left; padding: var(--spacing-md); background: white; border-radius: var(--border-radius); border: 2px dashed var(--color-border);">
-                                <p style="font-weight: 600; margin-bottom: var(--spacing-sm);">Add your bio here</p>
-                                <p style="font-size: 0.875rem; color: var(--color-text-light); margin-bottom: var(--spacing-sm);">Include:</p>
-                                <ul style="font-size: 0.875rem; color: var(--color-text-light); margin-left: var(--spacing-md); list-style-type: disc;">
-                                    <li>Background & experience</li>
-                                    <li>Education & credentials</li>
-                                    <li>What drives you</li>
-                                    <li>How you help clients</li>
-                                </ul>
-                                <p style="font-size: 0.875rem; color: var(--color-text-light); margin-top: var(--spacing-sm); font-style: italic;">Keep it authentic and client-focused.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ============================================================
+     Stats row
+     ============================================================ -->
+<section class="stats reveal" aria-label="Key metrics">
+  <div class="container">
+    <div class="stats__grid">
+      <div class="stat">
+        <div class="stat__num" style="font-size: clamp(1.85rem, 3vw, 2.5rem); padding-top: 0.45rem;"><em style="font-style:italic;">Nationwide</em></div>
+        <div class="stat__label">Operating across the country</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">5</div>
+        <div class="stat__label">Product lines across the investment stack</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">12 <em style="font-style:italic; color:var(--c-warm-gray); font-size:0.5em;">days</em></div>
+        <div class="stat__label">Median close-to-fund timeline</div>
+      </div>
+      <div class="stat">
+        <div class="stat__num">80<sup>%+</sup></div>
+        <div class="stat__label">Repeat-sponsor origination</div>
+      </div>
+    </div>
+  </div>
+</section>
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Why Work With Us</h2>
-                </div>
-                
-                <div class="grid grid-3">
-                    <div class="card">
-                        <h3>Relationship-Focused</h3>
-                        <p>We build long-term partnerships, not one-time transactions. Your success drives ours.</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Proven Track Record</h3>
-                        <p>Hundreds of millions underwritten across commercial and investment properties nationwide.</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Market Knowledge</h3>
-                        <p>5+ years in commercial and investment property finance with deep understanding of market dynamics.</p>
-                    </div>
-                    <div class="card">
-                        <h3>Capital Access</h3>
-                        <p>Strong relationships with institutional and private lenders enable creative solutions.</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Transparent Pricing</h3>
-                        <p>Better economics at scale. No hidden fees.</p>
-                    </div>
-                    
-                    <div class="card">
-                        <h3>Fast Execution</h3>
-                        <p>Pre-approvals in 48 hours. Most deals close in 30-45 days.</p>
-                    </div>
-                </div>
-            </div>
-        </section>
+<!-- ============================================================
+     Products
+     ============================================================ -->
+<section class="section products" id="products">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__head-left reveal">
+        <span class="kicker eyebrow-rule">The platform</span>
+        <h2>Capital across<br>the residential<br>investment stack.</h2>
+      </div>
+      <div class="section__head-right reveal" data-delay="1">
+        <p class="lede">
+          Five product lines, sourced from a panel of balance-sheet lenders, private credit funds,
+          and securitization desks. We work the scenario, structure the deal, and route it to the
+          capital that fits &mdash; not the other way around.
+        </p>
+      </div>
     </div>
 
-    <!-- ============================================
-         BLOG PAGE
-         ============================================ -->
-    <div id="blog" class="page">
-        <div class="hero">
-            <div class="container">
-                <h1>Insights & Resources</h1>
-                <p>Commercial real estate financing insights and market updates</p>
-            </div>
-        </div>
+    <div class="products__grid">
 
-        <section class="section">
-            <div class="container">
-                <div class="grid grid-3">
-                    <div class="blog-card" onclick="showPage('blog-dscr-guide')" style="cursor: pointer;">
-                        <span class="blog-category">Bridge Financing</span>
-                        <h3>Commercial Real Estate Bridge Financing: A Complete Guide</h3>
-                        <p>Understanding bridge loans for commercial acquisitions and transitional financing strategies.</p>
-                        <div style="margin-top: var(--spacing-sm);">
-                            <a href="#" onclick="event.stopPropagation(); showPage('blog-dscr-guide')">Read More →</a>
-                        </div>
-                    </div>
-                    
-                    <div class="blog-card" onclick="showPage('blog-scaling-portfolio')" style="cursor: pointer;">
-                        <span class="blog-category">Office Acquisition</span>
-                        <h3>How to Finance Your First Office Building Acquisition</h3>
-                        <p>Step-by-step guide to structuring your first commercial office building purchase.</p>
-                        <div style="margin-top: var(--spacing-sm);">
-                            <a href="#" onclick="event.stopPropagation(); showPage('blog-scaling-portfolio')">Read More →</a>
-                        </div>
-                    </div>
-                    
-                    <div class="blog-card" onclick="showPage('blog-market-outlook')" style="cursor: pointer;">
-                        <span class="blog-category">Capital Markets</span>
-                        <h3>Capital Markets Update: Commercial Real Estate Lending Trends</h3>
-                        <p>Current market conditions and lending trends in commercial real estate finance.</p>
-                        <div style="margin-top: var(--spacing-sm);">
-                            <a href="#" onclick="event.stopPropagation(); showPage('blog-market-outlook')">Read More →</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+      <article class="product reveal">
+        <header class="product__head">
+          <span class="product__num">01 / Fix &amp; Flip</span>
+          <span class="product__icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12 L7 3 L12 12 Z" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+        </header>
+        <h3 class="product__title">Fix &amp; Flip</h3>
+        <p class="product__copy">
+          Short-term bridge financing for the acquisition and renovation of one-to-four-unit
+          residential investment properties. Underwritten on as-is value, renovation scope, and
+          sponsor track record on similar product &mdash; not on personal income or W-2 documentation.
+        </p>
+        <div class="product__footer">
+          <span>Bridge · acquisition + rehab</span>
+          <span>12&ndash;24 months</span>
+        </div>
+      </article>
+
+      <article class="product reveal" data-delay="1">
+        <header class="product__head">
+          <span class="product__num">02 / DSCR</span>
+          <span class="product__icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="2" width="10" height="10" stroke="currentColor" stroke-width="1.2"/><path d="M2 7 H12" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+        </header>
+        <h3 class="product__title">DSCR Rental</h3>
+        <p class="product__copy">
+          Long-term rental financing underwritten on the property's debt service coverage rather
+          than borrower income. Built for sponsors scaling portfolios across jurisdictions, entity
+          structures, and asset profiles &mdash; including blanket execution on stabilized pools.
+        </p>
+        <div class="product__footer">
+          <span>Term · 30-year amort</span>
+          <span>1&ndash;100+ unit portfolios</span>
+        </div>
+      </article>
+
+      <article class="product reveal">
+        <header class="product__head">
+          <span class="product__num">03 / Ground-up</span>
+          <span class="product__icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 12 V5 L7 2 L12 5 V12" stroke="currentColor" stroke-width="1.2"/><path d="M2 12 H12" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+        </header>
+        <h3 class="product__title">New Construction</h3>
+        <p class="product__copy">
+          Ground-up financing for residential builders and developers &mdash; single-family infill,
+          small-lot subdivisions, and attached townhome product. Structured with budget-and-draw
+          discipline and underwritten to the build timeline, not a generic construction template.
+        </p>
+        <div class="product__footer">
+          <span>Construction · vertical + horizontal</span>
+          <span>18&ndash;36 months</span>
+        </div>
+      </article>
+
+      <article class="product reveal" data-delay="1">
+        <header class="product__head">
+          <span class="product__num">04 / Multifamily</span>
+          <span class="product__icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><rect x="2" y="3" width="4" height="9" stroke="currentColor" stroke-width="1.2"/><rect x="8" y="5" width="4" height="7" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+        </header>
+        <h3 class="product__title">Multifamily</h3>
+        <p class="product__copy">
+          Small-to-mid-balance multifamily acquisition, refinance, and bridge-to-agency execution.
+          Typically five to fifty units &mdash; value-add, repositioning, and yield strategies underwritten
+          on the property's operating story rather than a single debt service ratio in a vacuum.
+        </p>
+        <div class="product__footer">
+          <span>Bridge + term · 5&ndash;50 units</span>
+          <span>Acquisition · refi · cash-out</span>
+        </div>
+      </article>
+
+      <article class="product product--wide reveal">
+        <header class="product__head">
+          <span class="product__num">05 / Bridge</span>
+          <span class="product__icon" aria-hidden="true">
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M2 9 H12" stroke="currentColor" stroke-width="1.2"/><path d="M4 9 V6 M7 9 V5 M10 9 V6" stroke="currentColor" stroke-width="1.2"/></svg>
+          </span>
+        </header>
+        <h3 class="product__title">Bridge</h3>
+        <p class="product__copy">
+          Flexible bridge capital for residential and small commercial investment properties &mdash;
+          acquisition, recapitalization, partner buyouts, distressed take-outs, and time-sensitive
+          opportunities where conventional execution is too slow or too rigid. Structured deal-by-deal,
+          priced to the scenario, and closed on the schedule the transaction actually requires.
+        </p>
+        <div class="product__footer">
+          <span>Bridge · transitional</span>
+          <span>Custom term · flexible structure</span>
+        </div>
+      </article>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Approach
+     ============================================================ -->
+<section class="section approach" id="approach">
+  <div class="container">
+    <div class="section__head">
+      <div class="section__head-left reveal">
+        <span class="kicker eyebrow-rule eyebrow-rule--on-dark">Approach</span>
+        <h2>How we think<br>about lending.</h2>
+      </div>
+      <div class="section__head-right reveal" data-delay="1">
+        <p class="lede">
+          We are a broker, but we operate like a desk. Three principles run through every quote we
+          send, every term sheet we negotiate, and every closing we coordinate.
+        </p>
+      </div>
     </div>
 
-    <div id="contact" class="page">
-        <div class="hero">
-            <div class="container">
-                <h1>Get Started Today</h1>
-                <p>Talk to an investment property specialist</p>
-            </div>
+    <div class="approach__grid">
+      <div class="pillars">
+
+        <div class="pillar reveal">
+          <span class="pillar__num">i.</span>
+          <h3 class="pillar__title">Underwrite the deal, not the borrower.</h3>
+          <p class="pillar__copy">
+            Conventional residential lending starts with a W-2. We start with basis, exit, and the
+            sponsor's track record on similar product. That is how institutional debt has always been
+            underwritten &mdash; and it is how investment financing should be.
+          </p>
         </div>
 
-        <section class="section">
-            <div class="container">
-                <div class="contact-grid">
-                    <div>
-                        <h2>Send Us a Message</h2>
-                        <p style="margin-bottom: var(--spacing-md);">Fill out the form and we will contact you within 24 hours.</p>
-                        
-                        <form id="contactForm" action="https://formspree.io/f/mrejrzdw" method="POST" onsubmit="handleFormspreeSubmit()">
-                            
-                            <div class="form-group">
-                                <label for="name">Full Name *</label>
-                                <input type="text" id="name" name="name" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="email">Email Address *</label>
-                                <input type="email" id="email" name="email" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="phone">Phone Number *</label>
-                                <input type="tel" id="phone" name="phone" required>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="product">Product Interest</label>
-                                <select id="product" name="product">
-                                    <option value="">Select a product...</option>
-                                    <option value="dscr">DSCR Loan</option>
-                                    <option value="fix-flip">Fix & Flip</option>
-                                    <option value="bridge">Bridge Loan</option>
-                                    <option value="construction">New Construction</option>
-                                    <option value="multifamily">Multifamily</option>
-                                    <option value="commercial">Commercial</option>
-                                    <option value="portfolio">Portfolio Financing</option>
-                                    <option value="hard-money">Hard Money</option>
-                                    <option value="other">Not Sure / Other</option>
-                                </select>
-                            </div>
-                            
-                            <div class="form-group">
-                                <label for="message">Tell Us About Your Project *</label>
-                                <textarea id="message" name="message" required placeholder="Property type, location, loan amount needed, timeline, etc."></textarea>
-                            </div>
-                            
-                            <button type="submit" class="btn btn-primary" style="width: 100%;">Submit Inquiry</button>
-                        </form>
-                    </div>
-                    
-                    <div class="contact-info">
-                        <h3>Contact Information</h3>
-                        
-                        <div class="contact-item">
-                            <strong>Phone</strong>
-                            <p>(734) 822-0442</p>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <strong>Email</strong>
-                            <p>info@investormortgage.io</p>
-                        </div>
-                        
-                        <div class="contact-item">
-                            <strong>Hours</strong>
-                            <p>24 Hours / 7 Days a Week</p>
-                        </div>
-                        
-                        <div style="margin-top: var(--spacing-md); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
-                            <h4>Fast Response Guarantee</h4>
-                            <p>We respond to all inquiries within 24 hours on business days. For urgent matters, call us directly.</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+        <div class="pillar reveal" data-delay="1">
+          <span class="pillar__num">ii.</span>
+          <h3 class="pillar__title">Close on the timeline the deal requires.</h3>
+          <p class="pillar__copy">
+            Sponsors do not lose deals because capital is unavailable. They lose them because capital
+            is unreliable. Our role is to make timing the part of execution you do not have to
+            manage &mdash; not a variable, not a request, not a hope.
+          </p>
+        </div>
 
-        <section class="section section-alt">
-            <div class="container">
-                <div class="section-header">
-                    <h2>Ready to Get Pre-Approved?</h2>
-                    <p>Get a competitive rate quote in minutes</p>
-                </div>
-                <div style="text-align: center;">
-                    <p style="margin-bottom: var(--spacing-sm);">Our streamlined pre-approval process gets you shopping with confidence</p>
-                    <button class="btn btn-primary" onclick="showPage('contact')">Start Pre-Approval</button>
-                </div>
-            </div>
-        </section>
+        <div class="pillar reveal" data-delay="2">
+          <span class="pillar__num">iii.</span>
+          <h3 class="pillar__title">Structure with the next loan in mind.</h3>
+          <p class="pillar__copy">
+            A first closing is a transaction. The tenth is a relationship. We work in scenarios &mdash;
+            what the property is today, what it becomes after the work, what the take-out looks like &mdash;
+            because that is what scaling a portfolio actually requires.
+          </p>
+        </div>
+
+      </div>
+
+      <div class="approach__visual reveal" data-delay="1">
+        <img
+          src="https://images.unsplash.com/photo-1486325212027-8081e485255e?auto=format&fit=crop&w=1200&q=80"
+          alt="Residential investment property façade"
+          loading="lazy"
+          onerror="this.classList.add('is-broken')">
+        <div class="approach__visual-caption">
+          &ldquo;Underwritten the way a sponsor would want their own capital arranged.&rdquo;
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     About
+     ============================================================ -->
+<section class="section about" id="about">
+  <div class="container">
+    <div class="about__head reveal">
+      <span class="kicker eyebrow-rule" style="display:block; margin-bottom:1.5rem;">About</span>
+      <h2>Built for the way investment portfolios actually scale.</h2>
+      <p class="lede" style="margin-top:1.5rem;">
+        Investor Mortgage is a residential investment debt desk operating across all fifty states.
+        We work a panel of balance-sheet lenders, private credit funds, and securitization desks &mdash;
+        placing each scenario with the provider whose box, leverage, and timeline most closely
+        match the deal in front of us.
+      </p>
     </div>
 
-    <!-- ============================================
-         BLOG POST: DSCR GUIDE
-         ============================================ -->
-    <div id="blog-dscr-guide" class="page">
-        <div class="hero">
-            <div class="container">
-                <p style="margin-bottom: var(--spacing-sm);"><a href="#blog" onclick="showPage('blog')" style="color: rgba(255,255,255,0.8);">← Back to Blog</a></p>
-                <h1>Commercial Real Estate Bridge Financing: A Complete Guide</h1>
-                <p>January 15, 2026 • Education</p>
-            </div>
+    <div class="diffs">
+
+      <div class="diff reveal">
+        <div class="diff__label">i. &mdash; Coverage</div>
+        <h3 class="diff__title">Multi-lender execution under one intake.</h3>
+        <p class="diff__copy">
+          Sponsors submit a deal once. We work it across the panel and return the structures that
+          actually clear &mdash; not the lowest teaser quote from a single source. Full market visibility,
+          one point of contact.
+        </p>
+      </div>
+
+      <div class="diff reveal" data-delay="1">
+        <div class="diff__label">ii. &mdash; Underwriting</div>
+        <h3 class="diff__title">In-house scenario work before placement.</h3>
+        <p class="diff__copy">
+          We pressure-test the deal before it touches a lender. Basis, scope, comps, exit, sponsor
+          experience &mdash; vetted internally so the term sheet that lands is one a credit committee
+          will actually clear.
+        </p>
+      </div>
+
+      <div class="diff reveal" data-delay="2">
+        <div class="diff__label">iii. &mdash; Relationship</div>
+        <h3 class="diff__title">Structured for the repeat sponsor.</h3>
+        <p class="diff__copy">
+          Most of our origination comes from sponsors on their second, fifth, or fifteenth loan.
+          Each closing is structured assuming the next deal is already being sourced &mdash; and the
+          paperwork, lender relationship, and pricing memory carry forward.
+        </p>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Contact
+     ============================================================ -->
+<section class="section contact" id="contact">
+  <div class="container">
+    <div class="contact__grid">
+
+      <div class="contact__head reveal">
+        <span class="kicker eyebrow-rule" style="display:block; margin-bottom:1.5rem;">Contact</span>
+        <h2>Send the scenario.</h2>
+        <p class="lede">
+          A two-sentence summary is enough to start. We respond inside one business day with a
+          read on structure, leverage, and the most fitting capital on our panel.
+        </p>
+
+        <div class="contact__details">
+          <div class="contact__detail">
+            <span class="contact__detail-label">Direct</span>
+            <span class="contact__detail-value"><a href="tel:+1XXXXXXXXXX">XXX-XXX-XXXX</a></span>
+          </div>
+          <div class="contact__detail">
+            <span class="contact__detail-label">Email</span>
+            <span class="contact__detail-value"><a href="mailto:info@investormortgage.io">info@investormortgage.io</a></span>
+          </div>
+          <div class="contact__detail">
+            <span class="contact__detail-label">Coverage</span>
+            <span class="contact__detail-value">Operating across the nation</span>
+          </div>
+        </div>
+      </div>
+
+      <form class="form reveal" data-delay="1" id="contactForm" novalidate>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-name">Name</label>
+            <input type="text" id="f-name" name="name" required autocomplete="name">
+          </div>
+          <div class="field">
+            <label for="f-firm">Firm / entity</label>
+            <input type="text" id="f-firm" name="firm" autocomplete="organization">
+          </div>
         </div>
 
-        <section class="section">
-            <div class="container" style="max-width: 800px;">
-                <p><strong>DSCR (Debt Service Coverage Ratio) loans</strong> have revolutionized rental property financing by allowing investors to qualify based on property cash flow rather than personal income. Here's everything you need to know.</p>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-email">Email</label>
+            <input type="email" id="f-email" name="email" required autocomplete="email">
+          </div>
+          <div class="field">
+            <label for="f-phone">Phone</label>
+            <input type="tel" id="f-phone" name="phone" autocomplete="tel">
+          </div>
+        </div>
 
-                <h2>What is a DSCR Loan?</h2>
-                <p>A DSCR loan is a type of investment property mortgage that qualifies borrowers based on the rental income generated by the property, not the borrower's personal income or tax returns. The lender calculates the property's debt service coverage ratio to determine if the rental income can cover the mortgage payment.</p>
+        <div class="form__row">
+          <div class="field">
+            <label for="f-product">Product</label>
+            <select id="f-product" name="product" required>
+              <option value="" disabled selected>Select a product</option>
+              <option>Fix &amp; Flip</option>
+              <option>DSCR Rental</option>
+              <option>New Construction</option>
+              <option>Multifamily</option>
+              <option>Bridge</option>
+              <option>Other / multiple</option>
+            </select>
+          </div>
+          <div class="field">
+            <label for="f-market">Property market</label>
+            <input type="text" id="f-market" name="market" placeholder="City, state or zip">
+          </div>
+        </div>
 
-                <h2>How DSCR is Calculated</h2>
-                <p>The formula is simple:</p>
-                <p><strong>DSCR = Monthly Rental Income ÷ Monthly Debt Service (PITI)</strong></p>
-                <p>For example, if a property generates $2,500/month in rent and the mortgage payment (including taxes and insurance) is $2,000/month:</p>
-                <p>DSCR = $2,500 ÷ $2,000 = 1.25</p>
+        <div class="field">
+          <label for="f-deal">Deal summary</label>
+          <textarea id="f-deal" name="deal" placeholder="Purchase price, basis, scope, requested leverage, timeline. Two sentences is fine." required></textarea>
+        </div>
 
-                <h2>Minimum DSCR Requirements</h2>
-                <p>Most lenders require a minimum DSCR of 1.0 to 1.25. A DSCR of 1.0 means the rental income exactly covers the mortgage payment. Higher ratios indicate stronger cash flow and typically qualify for better rates.</p>
+        <button type="submit" class="form__submit">Send to underwriting</button>
 
-                <h2>Key Benefits</h2>
-                <p><strong>No Tax Returns Required:</strong> Perfect for self-employed investors or those with complex tax situations.</p>
-                <p><strong>Unlimited Properties:</strong> Unlike conventional loans, there's typically no limit on how many DSCR loans you can have.</p>
-                <p><strong>Cash-Out Refinancing Available:</strong> Access your equity without income verification.</p>
+        <div class="form__confirm" id="formConfirm" role="status" aria-live="polite">
+          Received. A member of our desk will respond within one business day.
+        </div>
 
-                <h2>Who Should Consider a DSCR Loan?</h2>
-                <p>DSCR loans are ideal for experienced real estate investors who have strong rental properties but don't want to verify personal income. They're particularly valuable for investors with multiple properties, self-employed individuals, or those looking to scale their portfolios quickly.</p>
+        <p class="form__note">
+          Submitting this form is not a loan application. Investor Mortgage arranges
+          business-purpose financing only &mdash; not for owner-occupied residences or
+          consumer use. All loans subject to underwriting, credit, and property approval.
+        </p>
+      </form>
 
-                <p style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
-                    <a href="#contact" onclick="showPage('contact')" class="btn btn-primary">Get Pre-Approved for a DSCR Loan</a>
-                </p>
-            </div>
-        </section>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     Footer
+     ============================================================ -->
+<footer class="footer">
+  <div class="container">
+    <div class="footer__top">
+
+      <div>
+        <div class="brand">
+          <svg class="brand__mark" viewBox="0 0 26 26" fill="none" aria-hidden="true">
+            <rect x="0.5" y="0.5" width="25" height="25" stroke="currentColor" stroke-opacity="0.55"/>
+            <path d="M7.5 7V19" stroke="currentColor" stroke-width="1.4" stroke-linecap="square"/>
+            <path class="accent" d="M11.5 19 L11.5 7 L15 14 L18.5 7 L18.5 19" stroke-width="1.4" stroke-linejoin="miter" stroke-linecap="square"/>
+          </svg>
+          <span class="brand__word">
+            <span>INVESTOR</span>
+            <span class="brand__pipe">|</span>
+            <span>MORTGAGE</span>
+          </span>
+        </div>
+        <p class="footer__tag">
+          A residential investment debt desk. Capital placed the way a sponsor would arrange it themselves.
+        </p>
+      </div>
+
+      <div class="footer__col">
+        <h5>Platform</h5>
+        <ul>
+          <li><a href="#products">Fix &amp; Flip</a></li>
+          <li><a href="#products">DSCR Rental</a></li>
+          <li><a href="#products">New Construction</a></li>
+          <li><a href="#products">Multifamily</a></li>
+          <li><a href="#products">Bridge</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>Firm</h5>
+        <ul>
+          <li><a href="#approach">Approach</a></li>
+          <li><a href="#about">About</a></li>
+          <li><a href="#contact">Contact</a></li>
+        </ul>
+      </div>
+
+      <div class="footer__col">
+        <h5>Reach the desk</h5>
+        <ul>
+          <li><a href="tel:+1XXXXXXXXXX">XXX-XXX-XXXX</a></li>
+          <li><a href="mailto:info@investormortgage.io">info@investormortgage.io</a></li>
+          <li>Operating across the nation</li>
+        </ul>
+      </div>
+
     </div>
 
-    <!-- ============================================
-         BLOG POST: SCALING PORTFOLIO
-         ============================================ -->
-    <div id="blog-scaling-portfolio" class="page">
-        <div class="hero">
-            <div class="container">
-                <p style="margin-bottom: var(--spacing-sm);"><a href="#blog" onclick="showPage('blog')" style="color: rgba(255,255,255,0.8);">← Back to Blog</a></p>
-                <h1>How to Finance Your First Office Building Acquisition</h1>
-                <p>January 10, 2026 • Case Study</p>
-            </div>
-        </div>
-
-        <section class="section">
-            <div class="container" style="max-width: 800px;">
-                <p><strong>Meet Sarah</strong>, a real estate investor who transformed her small portfolio of 3 rental properties into a thriving 15-property business in just 18 months. Here's how she did it using strategic financing.</p>
-
-                <h2>The Starting Point</h2>
-                <p>Sarah owned 3 single-family rentals in her local market, all with conventional 30-year mortgages. While the properties cash flowed well, she hit a wall: conventional lenders told her she'd maxed out at 10 financed properties total, and her debt-to-income ratio was too high to qualify for more loans.</p>
-
-                <h2>The Strategy Shift</h2>
-                <p>Sarah discovered DSCR loans and realized she could qualify based on rental income alone. She developed a clear acquisition plan:</p>
-                
-                <p><strong>Properties 4-6:</strong> Used DSCR loans to purchase three turnkey rentals in growing Sun Belt markets. Each property had a DSCR above 1.25, making financing straightforward.</p>
-                
-                <p><strong>Properties 7-10:</strong> Leveraged a portfolio loan to refinance her original 3 properties plus purchase 1 new one. This consolidated her financing and freed up capital.</p>
-                
-                <p><strong>Properties 11-15:</strong> Combined DSCR loans with a revolving line of credit for down payments, allowing her to move quickly on opportunities.</p>
-
-                <h2>The Numbers</h2>
-                <p>Total portfolio value: $3.2M</p>
-                <p>Monthly cash flow: $8,500</p>
-                <p>Average equity per property: $85,000</p>
-                <p>Time to scale: 18 months</p>
-
-                <h2>Key Lessons</h2>
-                <p><strong>1. Don't let conventional lending limits stop you.</strong> Alternative financing products exist for exactly this scenario.</p>
-                <p><strong>2. Cash flow is king.</strong> Every property Sarah purchased had strong fundamentals and positive cash flow from day one.</p>
-                <p><strong>3. Speed matters.</strong> Having pre-approval and ready access to capital meant Sarah could close deals quickly in competitive markets.</p>
-
-                <p style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
-                    <a href="#contact" onclick="showPage('contact')" class="btn btn-primary">Ready to Scale Your Portfolio?</a>
-                </p>
-            </div>
-        </section>
+    <div class="footer__bottom">
+      <div class="footer__bottom-fine">
+        &copy; <span id="year">2026</span> Investor Mortgage. Business-purpose lending only &mdash; not for owner-occupied residences or consumer use. All loans subject to underwriting, credit, and property approval. Not a commitment to lend.
+      </div>
+      <div>Operating across the nation</div>
     </div>
+  </div>
+</footer>
 
-    <!-- ============================================
-         BLOG POST: MARKET OUTLOOK
-         ============================================ -->
-    <div id="blog-market-outlook" class="page">
-        <div class="hero">
-            <div class="container">
-                <p style="margin-bottom: var(--spacing-sm);"><a href="#blog" onclick="showPage('blog')" style="color: rgba(255,255,255,0.8);">← Back to Blog</a></p>
-                <h1>Capital Markets Update: Commercial Real Estate Lending Trends</h1>
-                <p>January 5, 2026 • Market Analysis</p>
-            </div>
-        </div>
+<!-- ============================================================
+     Scripts
+     ============================================================ -->
+<script>
+(function() {
+  'use strict';
 
-        <section class="section">
-            <div class="container" style="max-width: 800px;">
-                <p>As we enter 2026, real estate investors face a dynamic market with both opportunities and challenges. Here's our analysis of key trends and what they mean for your investment strategy.</p>
+  /* Nav: scrolled state */
+  const nav = document.getElementById('nav');
+  const setScrolled = () => {
+    if (window.scrollY > 40) nav.classList.add('is-scrolled');
+    else nav.classList.remove('is-scrolled');
+  };
+  setScrolled();
+  window.addEventListener('scroll', setScrolled, { passive: true });
 
-                <h2>Interest Rate Environment</h2>
-                <p>After the volatility of recent years, interest rates have stabilized in the 6-7% range for investment properties. While higher than the historic lows of 2020-2021, rates are predictable and sustainable for cash-flowing deals.</p>
+  /* Mobile menu */
+  const toggle = document.getElementById('navToggle');
+  const overlay = document.getElementById('menuOverlay');
+  const body = document.body;
 
-                <p><strong>Our take:</strong> Don't wait for rates to drop. Focus on properties that work at today's rates—if rates do decline, you can refinance and boost your returns.</p>
+  const closeMenu = () => {
+    body.classList.remove('menu-open');
+    toggle.setAttribute('aria-expanded', 'false');
+    toggle.setAttribute('aria-label', 'Open menu');
+  };
+  const openMenu = () => {
+    body.classList.add('menu-open');
+    toggle.setAttribute('aria-expanded', 'true');
+    toggle.setAttribute('aria-label', 'Close menu');
+  };
 
-                <h2>Supply and Demand Dynamics</h2>
-                <p>Housing inventory remains tight in most markets, keeping competition high for quality properties. However, we're seeing increased opportunities in:</p>
-                
-                <p><strong>Secondary Markets:</strong> Cities like Boise, Nashville, and Raleigh continue to show strong fundamentals with better price points than coastal markets.</p>
-                
-                <p><strong>Multifamily:</strong> The rental demand remains robust, particularly for well-located 5-20 unit properties.</p>
-                
-                <p><strong>Value-Add Opportunities:</strong> Properties needing light renovation are seeing less competition than turnkey homes.</p>
+  toggle.addEventListener('click', () => {
+    if (body.classList.contains('menu-open')) closeMenu();
+    else openMenu();
+  });
 
-                <h2>Financing Trends</h2>
-                <p>DSCR and portfolio loans continue to gain popularity as investors seek alternatives to conventional financing. Lenders are becoming more competitive, leading to better terms and faster closings.</p>
+  document.querySelectorAll('[data-menu-link]').forEach(link => {
+    link.addEventListener('click', closeMenu);
+  });
 
-                <h2>Our 2026 Predictions</h2>
-                <p><strong>1. Rental demand stays strong</strong> as housing affordability challenges keep homeownership out of reach for many.</p>
-                <p><strong>2. Cash flow becomes even more critical</strong> as speculation cools and investors focus on fundamentals.</p>
-                <p><strong>3. Creative financing grows</strong> as savvy investors use tools like DSCR loans and lines of credit to move quickly.</p>
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && body.classList.contains('menu-open')) closeMenu();
+  });
 
-                <h2>Bottom Line</h2>
-                <p>2026 favors prepared, well-financed investors who can act quickly on quality deals. The key is focusing on cash-flowing properties in strong rental markets and having your financing lined up before you find the perfect property.</p>
-
-                <p style="margin-top: var(--spacing-lg); padding-top: var(--spacing-md); border-top: 1px solid var(--color-border);">
-                    <a href="#contact" onclick="showPage('contact')" class="btn btn-primary">Get Pre-Approved Today</a>
-                </p>
-            </div>
-        </section>
-    </div>
-
-    <!-- ============================================
-         FOOTER
-         ============================================ -->
-    <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h4>Investor Mortgage</h4>
-                    <p>Commercial and investment property finance.</p>
-                    <p style="margin-top: var(--spacing-sm);">Licensed in 42 states</p>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Commercial</h4>
-                    <ul>
-                        <li><a href="#" onclick="showPage('products')">Office & Retail</a></li>
-                        <li><a href="#" onclick="showPage('products')">Industrial</a></li>
-                        <li><a href="#" onclick="showPage('products')">Multifamily</a></li>
-                        <li><a href="#" onclick="showPage('products')">Special Purpose</a></li>
-                        <li><a href="#" onclick="showPage('products')">Capital Markets</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Investment</h4>
-                    <ul>
-                        <li><a href="#" onclick="showPage('products')">Fix & Flip</a></li>
-                        <li><a href="#" onclick="showPage('products')">Bridge Loans</a></li>
-                        <li><a href="#" onclick="showPage('products')">Construction</a></li>
-                        <li><a href="#" onclick="showPage('products')">Line of Credit</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Company</h4>
-                    <ul>
-                        <li><a href="#" onclick="showPage('about')">About Us</a></li>
-                        <li><a href="#" onclick="showPage('blog')">Blog & Resources</a></li>
-                        <li><a href="#" onclick="showPage('contact')">Contact</a></li>
-                        <li><a href="#" onclick="alert('Careers page - Add your job listings here')">Careers</a></li>
-                        <li><a href="#" onclick="alert('Privacy Policy page - Add your privacy policy here')">Privacy Policy</a></li>
-                    </ul>
-                </div>
-                
-                <div class="footer-section">
-                    <h4>Get in Touch</h4>
-                    <ul>
-                        <li>Phone: (734) 822-0442</li>
-                        <li>Email: info@investormortgage.io</li>
-                    </ul>
-                </div>
-            </div>
-            
-            <div class="footer-bottom">
-                <p>&copy; 2026 Investor Mortgage LLC. All rights reserved. | Licensed in 42 states</p>
-            </div>
-        </div>
-    </footer>
-
-    <!-- ============================================
-         JAVASCRIPT - PAGE NAVIGATION
-         ============================================ -->
-    <script>
-        // Navigation function
-        function showPage(pageId, event) {
-            // Hide all pages
-            document.querySelectorAll('.page').forEach(page => {
-                page.classList.remove('active');
-            });
-            
-            // Remove active class from all nav links
-            document.querySelectorAll('.nav-link').forEach(link => {
-                link.classList.remove('active');
-            });
-            
-            // Show selected page
-            document.getElementById(pageId).classList.add('active');
-            
-            // Add active class to the nav link for this page
-            const navLink = document.querySelector(`.nav-link[onclick*="${pageId}"]`);
-            if (navLink) {
-                navLink.classList.add('active');
-            }
-            
-            // Close mobile menu if open
-            const navLinks = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            if (navLinks && navLinks.classList.contains('active')) {
-                navLinks.classList.remove('active');
-                menuToggle.classList.remove('active');
-            }
-            
-            // Scroll to top
-            window.scrollTo(0, 0);
-            
-            // Prevent default link behavior
-            if (event) {
-                event.preventDefault();
-            }
+  /* Reveal on scroll */
+  const revealEls = document.querySelectorAll('.reveal');
+  if ('IntersectionObserver' in window) {
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('in-view');
+          io.unobserve(entry.target);
         }
-        
-        // Mobile menu toggle function
-        function toggleMobileMenu() {
-            const navLinks = document.querySelector('.nav-links');
-            const menuToggle = document.querySelector('.mobile-menu-toggle');
-            
-            navLinks.classList.toggle('active');
-            menuToggle.classList.toggle('active');
+      });
+    }, { threshold: 0.12, rootMargin: '0px 0px -8% 0px' });
+    revealEls.forEach(el => io.observe(el));
+  } else {
+    revealEls.forEach(el => el.classList.add('in-view'));
+  }
+
+  /* Form: client-side handler */
+  const form = document.getElementById('contactForm');
+  const confirm = document.getElementById('formConfirm');
+  if (form) {
+    form.addEventListener('submit', (e) => {
+      e.preventDefault();
+      /* Basic validation */
+      const required = form.querySelectorAll('[required]');
+      let ok = true;
+      required.forEach(field => {
+        if (!field.value.trim()) {
+          field.style.borderBottomColor = 'var(--c-oxblood)';
+          ok = false;
         }
-        
-        // Form submission handler for Formspree
-        function handleFormspreeSubmit() {
-            // Formspree handles the actual submission
-            // Show a brief message before redirect
-            setTimeout(function() {
-                alert('Thank you for your inquiry! We will contact you within 24 hours.');
-            }, 100);
-            return true; // Allow form to submit normally
-        }
-        
-        // Handle direct navigation via URL hash
-        window.addEventListener('load', () => {
-            const hash = window.location.hash.substring(1);
-            if (hash && document.getElementById(hash)) {
-                showPage(hash);
-            }
-        });
-    </script>
+      });
+      if (!ok) return;
+
+      /* Show confirmation */
+      confirm.classList.add('is-visible');
+      form.querySelectorAll('input, select, textarea').forEach(f => f.value = '');
+      setTimeout(() => {
+        confirm.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      }, 60);
+    });
+  }
+
+  /* Year */
+  const yearEl = document.getElementById('year');
+  if (yearEl) yearEl.textContent = new Date().getFullYear();
+
+})();
+</script>
+
 </body>
 </html>
